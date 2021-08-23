@@ -1,0 +1,165 @@
+{% extends 'shared/navigation_bar.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/profile_page.css"/>
+
+    <br/><br>
+    {% include 'messages/limit_jobs_message.html' %}
+    <br/><br>
+
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{ page_user.profile_photo.url }}" width="200" alt=""/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            {% if page_user.first_name and page_user.last_name %}
+                                {{ page_user.first_name }} {{ page_user.last_name }}
+                            {% else %}
+                                Име, Фамилия
+                            {% endif %}
+                        </h5>
+                        <h6>
+                            {% if page_user.profession %}
+                                {{ page_user.profession }}
+                            {% else %}
+                                Професия
+                            {% endif %}
+                        </h6>
+                        <p class="proile-rating">Дата на регистрация : <span>{{ profile.date_joined }}</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                   aria-controls="home" aria-selected="true">Информация</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                   aria-controls="profile" aria-selected="false">Обяви</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    {% if user.id == page_user.user_id %}
+                        <button type="button" class="btn btn-link"><a
+                                href="{% url 'create job' %}">Създай обява за работа</a></button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row blue-color-background">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>Социални мрежи</p>
+                        {% if page_user.website_url %}
+                            <p><a href="{{ page_user.website_url }}">Website</a><br/></p>
+                        {% else %}
+                            <p><a href="">Website Link</a><br/></p>
+                        {% endif %}
+                        {% if page_user.facebook_url %}
+                            <p><a href="{{ page_user.facebook_url }}">Facebook</a><br/></p>
+                        {% else %}
+                            <p><a href="">Facebook</a><br/></p>
+                        {% endif %}
+                        {% if page_user.instagram_url %}
+                            <p><a href="{{ page_user.instagram_url }}">Instagram</a></p>
+                        {% else %}
+                            <p><a href="">Instagram</a></p>
+                        {% endif %}
+                        {% if page_user.twitter_url %}
+                            <p><a href="{{ page_user.twitter_url }}">Twitter</a></p>
+                        {% else %}
+                            <p><a href="">Twitter</a></p>
+                        {% endif %}
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Потребителско име</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ profile.username }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Име</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if page_user.first_name and page_user.last_name %}
+                                        <p>{{ page_user.first_name }} {{ page_user.last_name }}</p>
+                                    {% else %}
+                                        <p>Име, Фамилия</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if user.id == page_user.user_id %}
+                                        <p>{{ profile.email }}</p>
+                                    {% else %}
+                                        <p>Само потребителя може да види имейла си!</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>ID</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ profile.id }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Професия</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if page_user.profession %}
+                                        <p>{{ page_user.profession }}</p>
+                                    {% else %}
+                                        <p>Професия</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            {% include 'jobs/../shared/jobs_context_box.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        {% if user.id == page_user.user_id %}
+            <button type="button" class="btn btn-link"><a
+                    href="{% url 'edit profile' page_user.pk %}">Редактирай Профил</a></button>
+            <button type="button" class="btn btn-link"><a
+                    href="{% url 'change-email-username' page_user.pk %}">Редактирай Имейл/Име</a></button>
+            <button type="button" class="btn btn-link"><a
+                    href="{% url 'delete profile' page_user.pk %}">Изтрий Профил</a></button>
+            <button type="button" class="btn btn-link"><a
+                    href="{% url 'password' %}">Промени Парола</a></button>
+        {% endif %}
+    </div>
+
+
+    <br/><br>
+
+    <hr width="1100px">
+
+    {% include 'shared/footer.html' %}
+
+{% endblock %}

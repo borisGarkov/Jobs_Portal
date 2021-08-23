@@ -1,0 +1,12 @@
+{% autoescape off %}
+    Здравейте {{ user.username }},
+
+    Моля натиснете върху линка отдолу, за да потвърдите рeгистрацията си,
+
+    http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+    Ако вие не сте направили тази заявка, моля игнорирайте имейла.
+
+    Поздрави,
+    Екипът на Rent A Hand :)
+{% endautoescape %}

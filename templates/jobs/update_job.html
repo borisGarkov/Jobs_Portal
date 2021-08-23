@@ -1,0 +1,25 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="/static/css/create-job.css">
+
+
+    {% if user.id == object.user_id %}
+        <section class="form rounded">
+            <h2>Редактирай Обява</h2>
+            <img src="/static/images/labor-day.png" alt="">
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Редактирай Обява</button>
+            </form>
+
+            <img class="img-2" src="/static/images/logo.png" alt="">
+
+        </section>
+    {% endif %}
+
+{% endblock %}

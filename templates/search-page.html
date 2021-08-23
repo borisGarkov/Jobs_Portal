@@ -1,0 +1,23 @@
+{% include 'shared/navigation_bar.html' %}
+
+{% block content %}
+    <br/><br>
+    {% if searched_text %}
+        <h4 style="text-align: center;">Ключова дума / израз - '{{ searched_text }}'</h4>
+    {% else %}
+        <h4 style="text-align: center;">Моля въведете дума или израз за търсене.. :)</h4>
+    {% endif %}
+    <br/><br>
+    {% if result %}
+        {% for text in result %}
+            <a href="{% url 'details job' text.id %}"><p style="text-align:center">{{ text }}</p></a>
+            <hr width="600px">
+        {% endfor %}
+    {% endif %}
+    {% if not result and searched_text %}
+        <p style="text-align: center;">
+            Нищо не е намерено за тази дума / израз.. :(
+        </p>
+    {% endif %}
+
+{% endblock %}

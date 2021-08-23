@@ -1,0 +1,75 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+    {% include 'messages/successful_application_sent.html' %}
+
+    <main>
+        <section class="main-header">
+
+            <article class="main-header-left">
+                <h1 class="display-4">Работа в удобно за вас време</h1>
+                <br>
+                <p class="lead">С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни
+                    интервюта.</p>
+            </article>
+
+            <article class="main-header-right">
+                <img src="/static/images/home-picture.png" alt="work to be done">
+            </article>
+        </section>
+
+        <br/><br>
+
+        {% if jobs %}
+            <h2 class="h2" style="margin-bottom: 50px;">Най-нови обяви за работа</h2>
+            {% include 'shared/jobs_context_box.html' %}
+        {% endif %}
+
+        <br/><br>
+
+        <section class="sub-header">
+            <section class="white-box">
+                <article class="sub-header-left">
+                    <img src="/static/images/home-picture-2.png" alt="work to be done">
+                </article>
+
+                <article class="sub-header-right">
+                    <h2>Защо Rent A Hand?</h2>
+                    <p>С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни интервюта.</p>
+                    <h6>Идеална възможност за:</h6>
+
+                    <div class="sub-points">
+                        <img src="/static/images/check.png" width="20" height="" alt="">
+                        <p>За всички търсещи работа без дългосрочни договори</p>
+                    </div>
+
+                    <div class="sub-points">
+                        <img src="/static/images/check.png" width="20" height="" alt="">
+                        <p>Идеална за студенти, хора на свободна практика и всички, които искат да изкарат допълнителни
+                            доходи</p>
+                    </div>
+                    <h6>Ние осигуряваме:</h6>
+
+                    <div class="sub-points">
+                        <img src="/static/images/check.png" width="20" height="" alt="">
+                        <p>Граждански договор за извършването на конкретна дейност</p>
+                    </div>
+                    <div class="sub-points">
+                        <img src="/static/images/check.png" width="20" height="" alt="">
+                        <p>Заплащане на час</p>
+                    </div>
+                    <div class="sub-points">
+                        <img src="/static/images/check.png" width="20" height="" alt="">
+                        <p>Екип, който да се погрижи целия работен процес да е изряден</p>
+                    </div>
+                </article>
+            </section>
+        </section>
+
+        <br/><br>
+
+    </main>
+
+    {% include 'shared/footer.html' %}
+{% endblock %}
+

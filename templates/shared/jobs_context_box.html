@@ -1,0 +1,27 @@
+<section class="boxes">
+
+    <div class="container" style="">
+        <div class="row">
+            {% for job in jobs %}
+                <div class="col-md-3 filterDiv {{ job.work_category }}" style="margin-bottom: 30px;">
+                    <div class="card-sl">
+                        <div class="card-image">
+                            <img src="{{ job.image.url }}" alt="photo"/>
+                        </div>
+                        <a class="card-action" href="{% url 'details job' job.id %}"><i class="fa fa-heart"></i></a>
+                        <div class="card-heading">
+                            {{ job.title }}
+                        </div>
+                        <div class="card-text">
+                            {{ job.city }}
+                        </div>
+                        <a href="{% url 'details job' job.id %}" class="card-button"> Виж Повече</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+

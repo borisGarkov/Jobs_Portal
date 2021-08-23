@@ -1,0 +1,161 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="/static/css/job_details_page.css">
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card-box task-detail">
+                        <div class="media mt-0 m-b-30"><img class="d-flex mr-3 rounded-circle" alt="64x64"
+                                                            src="{{ job.user.profilemodel.profile_photo.url }}"
+                                                            style="width: 48px; height: 48px;">
+                            <div class="media-body">
+                                <h5 class="media-heading mb-0 mt-0"><a
+                                        href="{% url 'profile' current_user.id %}">
+                                    {{ job.user.username }}</a>
+                                </h5>
+                                <span
+                                        class="badge badge-danger">{{ job.work_category }}</span></div>
+                        </div>
+                        <br/><br>
+                        <h4 class="m-b-20">{{ job.title }}</h4>
+                        <p class="text-muted">{{ job.description|safe }}</p>
+
+                        <ul class="list-inline task-dates m-b-0 mt-5">
+                            <li>
+                                <h5 class="m-b-5">Последно редактиран на:</h5>
+                                <p>{{ job.last_modified|date }} <small class="text-muted">{{ job.last_modified|time }}
+                                </small></p>
+                            </li>
+                            <li>
+                                <h5 class="m-b-5">Сърца: {{ job.total_likes }}</h5>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'like job' job.id %}">
+                                        {% if is_liked %}
+                                            <i class="fa fa-heart" aria-hidden="true" style="color: orangered;"></i>
+                                        {% else %}
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <div class="task-tags mt-4">
+                            <h5 class="">Населено място</h5>
+                            <div class="bootstrap-tagsinput">
+                                <span class="tag label label-info">{{ job.city }}<span
+                                        data-role="remove"></span></span>
+                            </div>
+                            <h5 class="">Категория</h5>
+                            <div class="bootstrap-tagsinput">
+                                <span class="tag label label-info">{{ job.work_category }}<span
+                                        data-role="remove"></span></span>
+                            </div>
+                            <h5 class="">Заплащане</h5>
+                            <div class="bootstrap-tagsinput">
+                                <span class="tag label label-info">{{ job.salary }}<span
+                                        data-role="remove"></span></span> лв. {{ job.salary_type }}
+                            </div>
+
+                        </div>
+
+                        <div class="attached-files mt-4">
+                            <h5 class="">Прикачени файлове</h5>
+                            <div class="files-list">
+                                <div class="file-box">
+                                    <a href=""><img src="{{ job.image.url }}"
+                                                    class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                    <p class="font-13 mb-1 text-muted"><small>Работна Снимка</small></p>
+                                </div>
+                            </div>
+                            {% if job.user.id == user.id %}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="text-right mt-4">
+                                            <button type="submit" class="btn btn-success waves-effect waves-light"><a
+                                                    href="{% url 'update job' job.id %}">
+                                                Редактирай</a>
+                                            </button>
+                                            <button type="button" class="btn btn-danger waves-effect"><a
+                                                    href="{% url 'delete job' job.id %}">Изтрий</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="text-right mt-4">
+                                            <button type="button" class="btn btn-info waves-effect"><a
+                                                    href="{% url 'apply' job.id %}">Кандидатствай</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="header-title m-b-30">Коментари: {{ job.comments_set.count }}</h4>
+                        <br>
+                        <div>
+
+                            {% for comment in job.comments_set.all %}
+                                <div class="media m-b-20">
+                                    <div class="d-flex mr-3">
+                                        <a href="{% url 'profile' comment.user.profilemodel.user_id %}"><img
+                                                class="media-object rounded-circle thumb-sm" alt=""
+                                                src="{{ comment.user.profilemodel.profile_photo.url }}"></a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="mt-0"><a
+                                                href="{% url 'profile' comment.user.profilemodel.user_id %}">
+                                            {{ comment.user.username }}</a>
+                                        </h5>
+                                        <p class="font-13 text-dark mb-0">{{ comment.comment }}</p>
+                                        <small>{{ comment.date_added }}</small>
+                                        {% if user.id == comment.user_id %}
+                                            <small style="color:red"><a href="{% url 'delete comment' comment.pk %}">Изтрий
+                                                Коментар</a></small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <hr>
+                            {% endfor %}
+                            {% if user.is_authenticated %}
+                                <form method="post" action="{% url 'post comment' job.id %}">
+                                    <div class="media-body">
+                                        {% csrf_token %}
+                                        <input type="text" class="form-control input-sm"
+                                               placeholder="Добави Коментар..."
+                                               name="comment">
+                                        <div class="mt-2 text-right">
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-custom waves-effect waves-light">
+                                                Публикувай
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container -->
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login_page.css"/>
+
+    <section class="form rounded">
+        <img src="/static/images/labor-day.png" alt="">
+
+        <form method="post" action="#">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Вход</button>
+        </form>
+        <br>
+        <small><a href="{% url 'password_reset' %}">Забравена Парола?</a></small>
+        <small><a href="{% url 'register' %}">Нямаш профил? Регистрирай се тук</a></small>
+
+        <img class="img-2" src="/static/images/logo.png" alt="">
+
+    </section>
+{% endblock %}

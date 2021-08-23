@@ -1,0 +1,35 @@
+.my-lg-0 img {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.heading-button a {
+    padding-right: 10px;
+}
+
+.heading-button {
+    display: flex;
+    align-items: center;
+}
+
+.online {
+    position: relative;
+}
+
+.online::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #41db51;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.navbar-collapse {
+    align-items: baseline;
+}

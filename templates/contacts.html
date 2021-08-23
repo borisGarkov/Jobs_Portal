@@ -1,0 +1,45 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/contacts_page.css"/>
+
+    <br/><br>
+    <section class="content">
+        <section class="content-left">
+            <h2>Свържете се с нас</h2>
+
+            <h3 style="color: rgb(244,116,36)">Адрес</h3>
+            <p><a href="https://twitter">ул. Митрополит Серафим №2, град Пирдоп</a></p>
+
+            <h3 style="color: rgb(244,116,36)">Телефон</h3>
+            <p>0882 288 911</p>
+            <p>0884 523 171</p>
+
+            <h3 style="color: rgb(244,116,36)">Имейл адрес</h3>
+            <p>rentahandbg@gmail.com</p>
+
+            <h2>Социални медии</h2>
+            <section class="social-media-links">
+                <a href="https://www.facebook.com/Rent-A-Hand-Bulgaria-101820744973512" class="fa fa-facebook"></a>
+                <a href="https://www.instagram.com/rent_a_hand_bulgaria/" class="fa fa-instagram"></a>
+                <a href="https://www.linkedin.com/company/67198457/" class="fa fa-linkedin"></a>
+            </section>
+        </section>
+
+        <section class="right-form">
+            <h2>Пишете ни</h2>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.first_name }}
+                {{ form.last_name }}
+                {{ form.email_address }}
+                {{ form.message }}
+                <br>
+                <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Изпрати</button>
+            </form>
+        </section>
+    </section>
+
+
+{% endblock %}

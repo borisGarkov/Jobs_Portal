@@ -1,0 +1,75 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/all_jobs_page_style.css">
+
+    <br/><br>
+    <p style="text-align: center;">
+        {#        <img src="/static/images/hand-shake.png" width="100px" style="text-align: center;" alt="">#}
+    </p>
+    <br>
+
+    <div id="myBtnContainer" style="text-align: center;">
+        <button class="btn btn-info" onclick="filterSelection('all')">Покажи Всички</button>
+
+        {% for cat in categories %}
+            <button class="btn btn-light" onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
+        {% endfor %}
+    </div>
+
+    <br/><br>
+    <br/><br>
+
+    {% include 'shared/jobs_context_box.html' %}
+
+    <br/><br>
+    <br/><br>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">&laquo; Първа</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предишна</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="">&laquo; Първа</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Предишна</a>
+                </li>
+            {% endif %}
+
+            {% for page in page_obj.paginator.page_range %}
+                <li class="page-item"><a class="page-link"
+                                         href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следваща</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последна &raquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="+1">Следваща</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="">Последна &raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <br/><br>
+
+    <hr width="1100px">
+
+    {% include 'shared/footer.html' %}
+
+{% endblock %}
