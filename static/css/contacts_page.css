@@ -9,7 +9,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background: rgb(248,249,250);
+    background: rgb(248, 249, 250);
     padding: 50px;
     /*border: 1px solid rgb(213,218,223);*/
 }
@@ -28,10 +28,17 @@ input[type="email"] {
 }
 
 /* Style all font awesome icons */
-.fa {
+.social-media-links .fab {
     padding: 20px;
     font-size: 30px;
     width: 50px;
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
     text-decoration: none;
 }
