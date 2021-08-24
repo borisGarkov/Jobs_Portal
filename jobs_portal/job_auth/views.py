@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordResetConfirmView
@@ -8,7 +9,7 @@ from django.db.models.query_utils import Q
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage, send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -44,7 +45,8 @@ class RegisterUser(FormView):
             mail_subject, message, to=[to_email]
         )
         email.send()
-        return render(self.request, 'profile/activation_needed.html')
+        messages.success(self.request, 'Моля затворете тази страница и активирайте акаунта през имейла си!')
+        return HttpResponseRedirect(reverse('home'))
 
 
 class UpdateEmailUsernamePage(UpdateView):
@@ -77,7 +79,8 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Благодаря за потвърждението! Сега можете да влезете в акаунта си!')
+        messages.success(request, 'Благодаря за потвърждението! Сега можете да влезете в акаунта си!')
+        return HttpResponseRedirect(reverse('login'))
     else:
         return HttpResponse('Активационният линк е невалиден!')
 
