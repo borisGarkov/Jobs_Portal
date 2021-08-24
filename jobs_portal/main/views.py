@@ -1,11 +1,12 @@
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from django.http import HttpResponseRedirect
 
-# Create your views here.
-from django.shortcuts import redirect, render
-from django.views import View
+from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.urls import reverse
 from django.views.generic import ListView, FormView, TemplateView
 
 from jobs_portal.jobs.models import JobModel
@@ -40,21 +41,25 @@ class ContactsView(FormView):
     template_name = 'contacts.html'
 
     def form_valid(self, form):
-        subject = "Website Inquiry"
-        body = {
+        email_subject = "Website Inquiry"
+
+        message = render_to_string('messages/website_question_form.html', {
             'first_name': form.cleaned_data['first_name'],
             'last_name': form.cleaned_data['last_name'],
             'email': form.cleaned_data['email_address'],
             'message': form.cleaned_data['message'],
-        }
-        message = "\n".join(body.values())
+        })
 
-        try:
-            send_mail(subject, message, from_email=form.cleaned_data['email_address'],
-                      recipient_list=['boris.garkov@abv.bg', 'rentahandbg@gmail.com'])
-        except BadHeaderError:
-            return HttpResponse('Invalid header found.')
-        return redirect('contacts')
+        email = EmailMessage(
+            subject=email_subject,
+            body=message,
+            to=['rentahandbg@gmail.com'],
+            cc=['boris.garkov@abv.bg'],
+        )
+
+        email.send()
+        messages.info(self.request, 'Благодарим Ви за имейла!')
+        return HttpResponseRedirect(reverse('contacts'))
 
 
 def search(request):

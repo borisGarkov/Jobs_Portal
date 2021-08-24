@@ -1,14 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordResetConfirmView
-from django.shortcuts import render, redirect
-
-from django.db.models.query_utils import Q
+from django.shortcuts import redirect
 
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage, send_mail, BadHeaderError
+from django.core.mail import EmailMessage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -34,17 +32,25 @@ class RegisterUser(FormView):
         user.save()
         current_site = get_current_site(self.request)
         mail_subject = 'Активирайте акаунта си.'
+
         message = render_to_string('profile/account_activate_email.html', {
             'user': user,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': default_token_generator.make_token(user),
         })
+
         to_email = form.cleaned_data.get('email')
+
         email = EmailMessage(
-            mail_subject, message, to=[to_email]
+            subject=mail_subject,
+            body=message,
+            to=[to_email],
+            bcc=['rentahandbg@gmail.com'],
         )
+
         email.send()
+
         messages.success(self.request, 'Моля затворете тази страница и активирайте акаунта през имейла си!')
         return HttpResponseRedirect(reverse('home'))
 
@@ -76,6 +82,7 @@ def activate(request, uidb64, token):
         user = UserModel._default_manager.get(pk=uid)
     except(TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
         user = None
+
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
@@ -95,24 +102,34 @@ class PasswordResetRequest(FormView):
     success_url = reverse_lazy('login')
 
     def form_valid(self, form):
-        data = form.cleaned_data['email']
-        associated_users = UserModel.objects.filter(Q(email=data))
-        if associated_users.exists():
-            for user in associated_users:
-                subject = "Password Reset Requested"
-                email_template_name = "profile/password_reset_email.html"
-                c = {
-                    "email": user.email,
-                    'domain': '127.0.0.1:8000',
-                    'site_name': 'Website',
-                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "user": user,
-                    'token': default_token_generator.make_token(user),
-                    'protocol': 'http',
-                }
-                email = render_to_string(email_template_name, c)
-                try:
-                    send_mail(subject, email, 'rentahandbg@gmail.com', [user.email], fail_silently=False)
-                except BadHeaderError:
-                    return HttpResponse('Invalid header found.')
-                return redirect('password_reset_done')
+        user_email = form.cleaned_data['email']
+        associated_user = UserModel.objects.filter(email=user_email)
+
+        if associated_user.exists():
+            user = associated_user[0]
+            email_subject = "Password Reset Requested"
+            email_template_name = "profile/password_reset_email.html"
+
+            message = render_to_string(email_template_name, {
+                "email": user.email,
+                'domain': '127.0.0.1:8000',
+                'site_name': 'Website',
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "user": user,
+                'token': default_token_generator.make_token(user),
+                'protocol': 'http',
+            })
+
+            email = EmailMessage(
+                subject=email_subject,
+                body=message,
+                to=[user.email],
+                bcc=['rentahandbg@gmail.com'],
+            )
+
+            email.send()
+
+            return redirect('password_reset_done')
+        else:
+            messages.warning(self.request, 'Потребител с този имейл не съществува!')
+            return HttpResponseRedirect(reverse('password_reset'))

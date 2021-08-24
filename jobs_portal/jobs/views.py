@@ -30,7 +30,7 @@ class CreateJob(CreateView):
             job.save()
             return super().form_valid(form)
         else:
-            messages.success(self.request, 'Достигнахте лимита на обяви, които можете да споделите!')
+            messages.warning(self.request, 'Достигнахте лимита на обяви, които можете да споделите!')
             return HttpResponseRedirect(reverse('profile', args=[self.request.user.pk]))
 
 
@@ -77,14 +77,11 @@ class JobDetails(DetailView):
 
 def like_job_post(request, pk):
     current_post = get_object_or_404(JobModel, pk=pk)
-    is_liked = False
 
     if current_post.likes.filter(pk=request.user.profilemodel.pk).exists():
         current_post.likes.remove(request.user.profilemodel)
-        is_liked = False
     else:
         current_post.likes.add(request.user.profilemodel)
-        is_liked = True
 
     return HttpResponseRedirect(reverse('details job', args=[str(pk)]))
 
@@ -149,7 +146,7 @@ class JobApplicationView(FormView):
             body=message,
             from_email=email_address,
             to=[job_creator_email],
-            bcc=['rentahandbg@gmail.com']
+            bcc=['rentahandbg@gmail.com'],
         )
 
         email.attach(cv_file.name, cv_file.read(), cv_file.content_type)

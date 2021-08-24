@@ -27,6 +27,7 @@ class ShowProfilePage(DetailView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class UpdateProfilePage(UpdateView):
     form_class = ProfileEditForm
     model = ProfileModel
