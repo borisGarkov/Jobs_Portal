@@ -57,24 +57,32 @@
                     <div class="profile-work">
                         <p>Социални мрежи</p>
                         {% if page_user.website_url %}
-                            <p><a href="{{ page_user.website_url }}">Website</a><br/></p>
+                            <p><i class="fas fa-home mr-3" style="color: #1fad83"></i><a
+                                    href="{{ page_user.website_url }}">Website</a><br/>
+                            </p>
                         {% else %}
-                            <p><a href="">Website Link</a><br/></p>
+                            <p><i class="fas fa-home mr-3" style="color: #1fad83"></i><a href="">Website Link</a><br/>
+                            </p>
                         {% endif %}
                         {% if page_user.facebook_url %}
-                            <p><a href="{{ page_user.facebook_url }}">Facebook</a><br/></p>
+                            <p><i class="fab fa-facebook mr-3" style="color: #2e9ad0"></i><a
+                                    href="{{ page_user.facebook_url }}">Facebook</a><br/></p>
                         {% else %}
-                            <p><a href="">Facebook</a><br/></p>
+                            <p><i class="fab fa-facebook mr-3" style="color: #2e9ad0"></i><a href="">Facebook</a><br/>
+                            </p>
                         {% endif %}
                         {% if page_user.instagram_url %}
-                            <p><a href="{{ page_user.instagram_url }}">Instagram</a></p>
+                            <p><i class="fab fa-instagram mr-3" style="color: #ca402b"></i><a
+                                    href="{{ page_user.instagram_url }}">Instagram</a></p>
                         {% else %}
-                            <p><a href="">Instagram</a></p>
+                            <p><i class="fab fa-instagram mr-3" style="color: #ca402b"></i><a href="">Instagram</a></p>
                         {% endif %}
                         {% if page_user.twitter_url %}
-                            <p><a href="{{ page_user.twitter_url }}">Twitter</a></p>
+                            <p><i class="fab fa-linkedin mr-3" style="color: #2e9ad0"></i><a
+                                    href="{{ page_user.twitter_url }}">LinkedIn</a>
+                            </p>
                         {% else %}
-                            <p><a href="">Twitter</a></p>
+                            <p><i class="fab fa-linkedin mr-3" style="color: #2e9ad0"></i><a href="">LinkedIn</a></p>
                         {% endif %}
                         <br>
                     </div>
