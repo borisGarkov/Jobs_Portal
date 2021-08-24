@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jl3i1knc^@hy+ng)(csnwnw8r!wz!tba)zxmmeeri-og^zay^j'
+SECRET_KEY = os.environ.get('SECRET_KEY'),
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'jobs_portal.profiles',
     'jobs_portal.jobs',
     'ckeditor',
-    'django_email_verification',
 ]
 
 MIDDLEWARE = [
@@ -89,10 +88,10 @@ WSGI_APPLICATION = 'jobs_portal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8cj3ejkrn270k',
-        'USER': 'fnwrgszxucawur',
-        'PASSWORD': 'c24acef309cf074de8d7535da36fa56a993cb673228d0d655b54654fbdb48e9c',
-        'HOST': 'ec2-54-72-155-238.eu-west-1.compute.amazonaws.com',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
         'PORT': '5432',
     }
 }
@@ -153,16 +152,16 @@ AUTH_USER_MODEL = 'job_auth.AppBaseUserModel'
 
 cloudinary.config(
     cloud_name="jobsportal",
-    api_key='273338451724339',
-    api_secret='9eOMyreJwYpV4kO_MLE4Es0w-3k',
+    api_key=os.environ.get('CLOUDINARY_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
     secure=True
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = '123456789gG!'
-EMAIL_HOST_USER = 'rentahandbg@gmail.com'
+EMAIL_HOST = os.environ.get('EMAIL_HOST'),
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD'),
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER'),
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
