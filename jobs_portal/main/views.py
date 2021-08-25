@@ -24,9 +24,25 @@ class HomeView(ListView):
         return JobModel.objects.order_by('-id')[:4]
 
 
-class AllJobsPageView(ListView):
+class AllJobsView(TemplateView):
+    template_name = 'all_jobs_pages/all-jobs-page.html'
+
+
+class LookingForJobsView(ListView):
     model = JobModel
-    template_name = 'all-jobs-page.html'
+    template_name = 'all_jobs_pages/show-all-jobs-template.html'
+    context_object_name = 'jobs'
+    paginate_by = 4
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = [cat[0] for cat in JobModel.WORK_CATEGORIES]
+        return context
+
+
+class OfferJobsView(ListView):
+    model = JobModel
+    template_name = 'all_jobs_pages/show-all-jobs-template.html'
     context_object_name = 'jobs'
     paginate_by = 4
 

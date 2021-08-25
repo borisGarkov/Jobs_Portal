@@ -1,0 +1,28 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jobs-main-page.css">
+
+    <h3>Избери Категория</h3>
+
+    <div class="main-row">
+
+
+        <div class="content-box" onclick="location.href='{% url 'looking for jobs' %}'">
+            <i class="fab fa-searchengin fa-7x"></i>
+            <br>
+            <p>Търся Хора</p>
+        </div>
+
+
+        <div class="content-box">
+            <i class="far fa-address-card fa-7x"></i>
+            <br>
+            <p>Предлагам Услуга</p>
+        </div>
+    </div>
+
+    <hr>
+    {% include 'shared/footer.html' %}
+{% endblock %}

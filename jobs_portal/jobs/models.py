@@ -21,6 +21,11 @@ class JobModel(models.Model):
         ('Сигурност', 'Сигурност'),
     ]
 
+    WORK_TYPE = [
+        ('Търся Хора', 'Търся Хора'),
+        ('Предлагам Услуга', 'Предлагам Услуга'),
+    ]
+
     SALARY_TYPE = [
         ('на час', 'на час'),
         ('на месец', 'на месец'),
@@ -51,6 +56,11 @@ class JobModel(models.Model):
         max_length=50,
         choices=WORK_CATEGORIES,
         default='IT'
+    )
+    work_type = models.CharField(
+        max_length=50,
+        choices=WORK_TYPE,
+        default='Търся Хора'
     )
     image = CloudinaryField(
         'image',
