@@ -117,7 +117,3 @@ class FooterView(ListView):
 
     def get_queryset(self):
         return JobModel.objects.count()
-
-
-class PricingListView(TemplateView):
-    template_name = 'pricing-list.html'

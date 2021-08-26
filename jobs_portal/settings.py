@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-jl3i1knc^@hy+ng)(csnwnw8r!wz!tba)zxmmeeri-og^zay^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'jobs_portal.main',
     'jobs_portal.profiles',
     'jobs_portal.jobs',
+    'jobs_portal.payments',
+
     'ckeditor',
 ]
 

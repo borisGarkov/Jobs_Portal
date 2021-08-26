@@ -22,4 +22,5 @@ urlpatterns = [
     path('auth/', include('jobs_portal.job_auth.urls')),
     path('profile/', include('jobs_portal.profiles.urls')),
     path('jobs/', include('jobs_portal.jobs.urls')),
+    path('payments/', include('jobs_portal.payments.urls')),
 ]
