@@ -11,12 +11,20 @@ h3 {
     text-align: center;
 }
 
+.content-box i {
+    color: #146CB4;
+}
+
+.content-box h6 {
+    color: #146CB4;
+}
+
 .content-box {
     flex-basis: 0;
     flex-grow: 1;
-    background: #FFFFFF;
     border-radius: 16px;
-    border: 1px solid #146CB4;
+    /*border: 1px solid #146CB4;*/
+    background: ghostwhite;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,10 +34,7 @@ h3 {
     max-width: 350px;
 }
 
+
 .content-box:hover {
     transform: scale(1.05);
-}
-
-.content-box i {
-    color: #146CB4;
 }
