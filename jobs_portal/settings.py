@@ -161,9 +161,9 @@ cloudinary.config(
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = 'smtp.elasticemail.com'
-EMAIL_HOST_PASSWORD = 'DBB0B20A9DEEDE93AB6AB3D3CA267DC01D49'
-EMAIL_HOST_USER = 'boris.garkov@abv.bg'
-EMAIL_PORT = 465
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -10,7 +10,7 @@
     <br>
 
     <div id="myBtnContainer" style="text-align: center;">
-        <button class="btn btn-info" onclick="filterSelection('all')">Покажи Всички</button>
+        <button class="btn btn-light" onclick="filterSelection('all')">Покажи Всички</button>
 
         {% for cat in categories %}
             <button class="btn btn-light" onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
