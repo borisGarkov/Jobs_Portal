@@ -24,7 +24,8 @@ class CreateJob(CreateView):
     form_class = JobForm
 
     def form_valid(self, form):
-        if self.request.user.jobmodel_set.count() + 1 <= 5:
+        if self.request.user.jobmodel_set.count() + 1 \
+                <= self.request.user.usersubscriptionplan.subscription_plan.max_job_posts:
             job = form.save(commit=False)
             job.user = self.request.user
             job.save()

@@ -46,7 +46,7 @@ class RegisterUser(FormView):
             subject=mail_subject,
             body=message,
             to=[to_email],
-            bcc=['rentahandbg@gmail.com'],
+            bcc=['rentahandbg@gmail.com', 'boris.garkov@abv.bg'],
         )
 
         email.send()

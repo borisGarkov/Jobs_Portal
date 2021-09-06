@@ -1,5 +1,83 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import TemplateView
+import stripe
+from django.conf import settings
+from jobs_portal.payments.models import Payments
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+class LandingCheckoutView(TemplateView):
+    template_name = 'payments/landing-checkout.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product_id = kwargs['pk']
+        context['product'] = Payments.objects.get(pk=product_id)
+        return context
+
+
+class SuccessCheckoutView(TemplateView):
+    template_name = 'payments/success.html'
+
+
+class CancelCheckoutView(TemplateView):
+    template_name = 'payments/cancel.html'
 
 
 class PricingListView(TemplateView):
     template_name = 'pricing-list.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class CreateCheckoutSessionView(View):
+    PRODUCT_IDS = {
+        1: settings.STRIPE_FREE_PLAN_ID,
+        2: settings.STRIPE_STANDARD_PLAN_ID,
+        3: settings.STRIPE_PREMIUM_PLAN_ID,
+    }
+
+    def post(self, request, *args, **kwargs):
+        # current_user_email = request.user.email
+        # current_customer_id = ''
+        # has_subscription = False
+        subscription_id = self.PRODUCT_IDS[kwargs['pk']]
+
+        if subscription_id == request.user.usersubscriptionplan.subscription_plan_id:
+            messages.success(self.request,
+                             'Вече имате абонамент за този план!')
+            return HttpResponseRedirect(reverse('home'))
+
+        # for customer in stripe.Customer.list().data:
+        #     if customer['email'] == current_user_email:
+        #         current_customer_id = customer['id']
+        #         break
+
+        # if current_customer_id != '':
+        #     for sub in stripe.Subscription.list().data:
+        #         if sub['customer'] == current_customer_id and sub['plan']['id'] == subscription_id:
+        #             has_subscription = True
+
+        domain = request.META['HTTP_ORIGIN']
+
+        session = stripe.checkout.Session.create(
+            customer_email=request.user.email,
+            success_url=domain + reverse('success-checkout'),
+            cancel_url=domain + reverse('cancel-checkout'),
+            payment_method_types=['card'],
+            mode='subscription',
+            line_items=[
+                {
+                    'price': subscription_id,
+                    'quantity': 1
+                }
+            ],
+        )
+
+        return redirect(session.url, code=303)

@@ -3,6 +3,7 @@ from django.db.models.signals import post_save, pre_delete, pre_save
 from django.dispatch import receiver
 
 from jobs_portal.job_auth.models import AppBaseUserModel
+from jobs_portal.payments.models import UserSubscriptionPlan, Payments
 from jobs_portal.profiles.models import ProfileModel
 
 
@@ -12,10 +13,15 @@ def create_user(sender, created, instance, **kwargs):
         profile = ProfileModel(
             user=instance
         )
+        subscription = UserSubscriptionPlan(
+            user=instance,
+            subscription_plan=Payments.objects.get(pk=1),
+        )
 
         picture = cloudinary.uploader.upload('anonymous-avatar-icon.jpg', folder='profile photos')
         profile.profile_photo = picture['public_id']
         profile.save()
+        subscription.save()
 
 
 @receiver(pre_delete, sender=ProfileModel)

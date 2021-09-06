@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>{{ product.title }}</title>
+    <link rel="stylesheet" href="/static/css/payments-style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<section>
+    <div class="product">
+        <img src="/static/images/human.png" alt="Subscription Plan"/>
+        <div class="description">
+            <h3>{{ product.title }}</h3>
+            <h5>{{ product.display_price }} лв.</h5>
+        </div>
+    </div>
+    <form action="{% url 'create-checkout-session' product.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" id="checkout-button">Поръчай</button>
+    </form>
+</section>
+</body>
+</html>

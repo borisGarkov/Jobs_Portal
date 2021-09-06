@@ -38,7 +38,6 @@ class AppUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-# Create your models here.
 class AppBaseUserModel(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique=True,
@@ -49,7 +48,7 @@ class AppBaseUserModel(AbstractBaseUser, PermissionsMixin):
     )
 
     username = models.CharField(
-        max_length=15,
+        max_length=25,
     )
 
     is_staff = models.BooleanField(
@@ -65,8 +64,6 @@ class AppBaseUserModel(AbstractBaseUser, PermissionsMixin):
     )
 
     date_joined = models.DateField(auto_now_add=True)
-
-    # is_email_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
 

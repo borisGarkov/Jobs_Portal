@@ -26,10 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-jl3i1knc^@hy+ng)(csnwnw8r!wz!tba)zxmmeeri-og^zay^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG_MODE', False)
 
 ALLOWED_HOSTS = ['*', ]
 
@@ -68,8 +68,7 @@ ROOT_URLCONF = 'jobs_portal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,10 +89,10 @@ WSGI_APPLICATION = 'jobs_portal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST'),
+        'NAME': 'd8cj3ejkrn270k',
+        'USER': 'fnwrgszxucawur',
+        'PASSWORD': 'c24acef309cf074de8d7535da36fa56a993cb673228d0d655b54654fbdb48e9c',
+        'HOST': 'ec2-54-72-155-238.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -167,3 +166,14 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+STRIPE_PUBLIC_KEY = 'pk_test_51JRvlrJzJoyRnDool41BvIlZ6SnwMUwnb5o3g0k7w9AnCA9PHdcYY3F0XZZ3leEucnJSRVJUzKBadV4o566vmtY8008djToZUz'
+# 'pk_live_51JRvlrJzJoyRnDooUNnZcx6FHy6nwrouW2cnwLnHAcqAIWB3XVeFGEbV3rCt7PFY3nit31sVEKnLXb6xNrjS34XX00bSmbeOr6'
+STRIPE_SECRET_KEY = 'sk_test_51JRvlrJzJoyRnDooI8lS2Eoasf08jXKBDzHbZMAEbjkzwgxhrFxIOpQWJSQQJs5X17DOlWZMbY8KlE88bSdVaaJg00l6Fblf2O'
+# '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'
+
+STRIPE_FREE_PLAN_ID = 1
+STRIPE_STANDARD_PLAN_ID = 'price_1JWMINJzJoyRnDooVaCaY9bM'
+STRIPE_PREMIUM_PLAN_ID = 'price_1JWRnEJzJoyRnDooJhhFpwtw'
+
+# STRIPE_WEBHOOK_SECRET = ''

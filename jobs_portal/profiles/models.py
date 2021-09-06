@@ -66,19 +66,3 @@ class ProfileModel(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} - User ({self.user})'
-
-#
-# class UserRankings(models.Model):
-#     SALARY_TYPE = [
-#         ('на час', 'на час'),
-#         ('на месец', 'на месец'),
-#         ('по договаряне', 'по договаряне'),
-#     ]
-#
-#
-#
-#     user = models.OneToOneField(
-#         to=UserModel,
-#         on_delete=models.CASCADE,
-#         primary_key=True,
-#     )
