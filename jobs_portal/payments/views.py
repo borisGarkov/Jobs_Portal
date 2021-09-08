@@ -103,7 +103,7 @@ def my_webhook_view(request):
 
     try:
         event = stripe.Webhook.construct_event(
-            json.loads(payload), sig_header, endpoint_secret
+            payload, sig_header, endpoint_secret
         )
     except ValueError as e:
         # Invalid payload
@@ -115,7 +115,7 @@ def my_webhook_view(request):
     # Handle the event
     if event.type == 'payment_intent.succeeded':
         payment_intent = event.data.object  # contains a stripe.PaymentIntent
-        customer_email = payment_intent['customer_details']['email']
+        # customer_email = payment_intent['customer_details']['email']
         product_id = payment_intent['metadata']['product_id']
         username = payment_intent['metadata']['username']
         user_id = payment_intent['metadata']['user_id']
@@ -124,18 +124,18 @@ def my_webhook_view(request):
         current_user.subscription_plan = Payments.objects.get(pk=product_id)
         current_user.save()
 
-        message = render_to_string('payments/payment-successful-email.html', {
-            'username': username
-        })
-
-        email = EmailMessage(
-            subject='Успешно Плащане!',
-            body=message,
-            to=[customer_email],
-            bcc=['rentahandbg@gmail.com', 'boris.garkov@abv.bg'],
-        )
-
-        email.send()
+        # message = render_to_string('payments/payment-successful-email.html', {
+        #     'username': username
+        # })
+        #
+        # email = EmailMessage(
+        #     subject='Успешно Плащане!',
+        #     body=message,
+        #     to=[customer_email],
+        #     bcc=['rentahandbg@gmail.com', 'boris.garkov@abv.bg'],
+        # )
+        #
+        # email.send()
 
     else:
         print('Unhandled event type {}'.format(event.type))
