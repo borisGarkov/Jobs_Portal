@@ -1,10 +1,15 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.core.mail import EmailMessage
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 import stripe
 from django.conf import settings
@@ -48,6 +53,7 @@ class CreateCheckoutSessionView(View):
         # current_customer_id = ''
         # has_subscription = False
         subscription_id = self.PRODUCT_IDS[kwargs['pk']]
+        product_id = kwargs['pk']
 
         if subscription_id == request.user.usersubscriptionplan.subscription_plan_id:
             messages.success(self.request,
@@ -78,6 +84,60 @@ class CreateCheckoutSessionView(View):
                     'quantity': 1
                 }
             ],
+            metadata={
+                'product_id': product_id,
+                'username': request.user.username,
+                'user_id': request.user.id,
+            }
         )
 
         return redirect(session.url, code=303)
+
+
+@csrf_exempt
+def my_webhook_view(request):
+    payload = request.body
+    sig_header = request.headers['STRIPE_SIGNATURE']
+    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            json.loads(payload), sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        raise e
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        raise e
+
+    # Handle the event
+    if event.type == 'payment_intent.succeeded':
+        payment_intent = event.data.object  # contains a stripe.PaymentIntent
+        customer_email = payment_intent['customer_details']['email']
+        product_id = payment_intent['metadata']['product_id']
+        username = payment_intent['metadata']['username']
+        user_id = payment_intent['metadata']['user_id']
+
+        current_user = Payments.objects.get(user=user_id)
+        current_user.subscription_plan = Payments.objects.get(pk=product_id)
+        current_user.save()
+
+        message = render_to_string('payments/payment-successful-email.html', {
+            'username': username
+        })
+
+        email = EmailMessage(
+            subject='Успешно Плащане!',
+            body=message,
+            to=[customer_email],
+            bcc=['rentahandbg@gmail.com', 'boris.garkov@abv.bg'],
+        )
+
+        email.send()
+
+    else:
+        print('Unhandled event type {}'.format(event.type))
+
+    return HttpResponse(status=200)

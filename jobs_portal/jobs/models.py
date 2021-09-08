@@ -72,6 +72,9 @@ class JobModel(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True,
     )
+    date_posted = models.DateTimeField(
+        auto_now_add=True
+    )
     user = models.ForeignKey(
         to=UserModel,
         on_delete=models.CASCADE,
@@ -91,3 +94,6 @@ class Comments(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     comment = models.CharField(max_length=500)
     date_added = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return f'Comment for {self.job}'
