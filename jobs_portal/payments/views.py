@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 import stripe
 from django.conf import settings
-from jobs_portal.payments.models import Payments
+from jobs_portal.payments.models import Payments, UserSubscriptionPlan
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -49,9 +49,9 @@ class CreateCheckoutSessionView(View):
     }
 
     def post(self, request, *args, **kwargs):
-        # current_user_email = request.user.email
-        # current_customer_id = ''
-        # has_subscription = False
+        current_user_email = request.user.email
+        current_customer_id = ''
+        subscription_to_delete = ''
         subscription_id = self.PRODUCT_IDS[kwargs['pk']]
         product_id = kwargs['pk']
 
@@ -60,15 +60,22 @@ class CreateCheckoutSessionView(View):
                              'Вече имате абонамент за този план!')
             return HttpResponseRedirect(reverse('home'))
 
-        # for customer in stripe.Customer.list().data:
-        #     if customer['email'] == current_user_email:
-        #         current_customer_id = customer['id']
-        #         break
+        if product_id == 1:
+            messages.warning(self.request,
+                             'Ако желаете да преминете към безплатния абонамент, '
+                             'моля първо деактивирайте сегашния си план от настройките в профила си!')
+            return HttpResponseRedirect(reverse('home'))
 
-        # if current_customer_id != '':
-        #     for sub in stripe.Subscription.list().data:
-        #         if sub['customer'] == current_customer_id and sub['plan']['id'] == subscription_id:
-        #             has_subscription = True
+        for customer in stripe.Customer.list().data:
+            if customer['email'] == current_user_email:
+                current_customer_id = customer['id']
+                break
+
+        if current_customer_id != '':
+            for sub in stripe.Subscription.list().data:
+                if sub['customer'] == current_customer_id:
+                    subscription_to_delete = sub['id']
+                    break
 
         domain = request.META['HTTP_ORIGIN']
 
@@ -88,6 +95,7 @@ class CreateCheckoutSessionView(View):
                 'product_id': product_id,
                 'username': request.user.username,
                 'user_id': request.user.id,
+                'subscription_to_delete': subscription_to_delete,
             }
         )
 
@@ -113,29 +121,36 @@ def my_webhook_view(request):
         raise e
 
     # Handle the event
-    if event.type == 'payment_intent.succeeded':
+    # if event.type == 'payment_intent.succeeded':
+    if event.type == 'checkout.session.completed':
+
         payment_intent = event.data.object  # contains a stripe.PaymentIntent
-        # customer_email = payment_intent['customer_details']['email']
+
+        customer_email = payment_intent['customer_details']['email']
         product_id = payment_intent['metadata']['product_id']
         username = payment_intent['metadata']['username']
         user_id = payment_intent['metadata']['user_id']
+        subscription_to_delete = payment_intent['metadata']['subscription_to_delete']
 
-        current_user = Payments.objects.get(user=user_id)
+        if subscription_to_delete != '':
+            stripe.Subscription.delete(subscription_to_delete)
+
+        current_user = UserSubscriptionPlan.objects.get(user=user_id)
         current_user.subscription_plan = Payments.objects.get(pk=product_id)
         current_user.save()
 
-        # message = render_to_string('payments/payment-successful-email.html', {
-        #     'username': username
-        # })
-        #
-        # email = EmailMessage(
-        #     subject='Успешно Плащане!',
-        #     body=message,
-        #     to=[customer_email],
-        #     bcc=['rentahandbg@gmail.com', 'boris.garkov@abv.bg'],
-        # )
-        #
-        # email.send()
+        message = render_to_string('payments/payment-successful-email.html', {
+            'username': username
+        })
+
+        email = EmailMessage(
+            subject='Успешно Плащане!',
+            body=message,
+            to=[customer_email],
+            bcc=['rentahandbg@gmail.com', 'boris.garkov@abv.bg'],
+        )
+
+        email.send()
 
     else:
         print('Unhandled event type {}'.format(event.type))
