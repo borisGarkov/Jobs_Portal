@@ -42,6 +42,13 @@
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                    aria-controls="profile" aria-selected="false">Обяви</a>
                             </li>
+                            {% if user.id == page_user.user_id %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="subscription-tab" data-toggle="tab" href="#subscription"
+                                       role="tab"
+                                       aria-controls="subscription" aria-selected="false">Абонамент</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -118,7 +125,7 @@
                                     {% if user.id == page_user.user_id %}
                                         <p>{{ profile.email }}</p>
                                     {% else %}
-                                        <p>Само потребителя може да види имейла си!</p>
+                                        <p>-</p>
                                     {% endif %}
                                 </div>
                             </div>
@@ -127,7 +134,11 @@
                                     <label>ID</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{ profile.id }}</p>
+                                    {% if user.id == page_user.user_id %}
+                                        <p>{{ profile.id }}</p>
+                                    {% else %}
+                                        <p>-</p>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="row">
@@ -145,6 +156,33 @@
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             {% include 'jobs/../shared/jobs_context_box.html' %}
+                        </div>
+                        <div class="tab-pane fade" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Абонамент</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ subscription_plan }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Следващо плащане по абонамент</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ next_invoice_date }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Деактивирай абонамент</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'cancel-subscription' %}">
+                                        ТУК</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

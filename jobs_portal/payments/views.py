@@ -14,6 +14,7 @@ from django.views.generic import TemplateView
 import stripe
 from django.conf import settings
 from jobs_portal.payments.models import Payments, UserSubscriptionPlan
+from utils.find_stripe_customer import find_stripe_customer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -40,6 +41,12 @@ class PricingListView(TemplateView):
     template_name = 'pricing-list.html'
 
 
+class CancelSubscriptionView(View):
+    def post(self, request, *args, **kwargs):
+        
+        return reverse("profile", kwargs={'pk': kwargs['pk']})
+
+
 @method_decorator(login_required, name='dispatch')
 class CreateCheckoutSessionView(View):
     PRODUCT_IDS = {
@@ -55,7 +62,7 @@ class CreateCheckoutSessionView(View):
         subscription_id = self.PRODUCT_IDS[kwargs['pk']]
         product_id = kwargs['pk']
 
-        if subscription_id == request.user.usersubscriptionplan.subscription_plan_id:
+        if product_id == request.user.usersubscriptionplan.subscription_plan_id:
             messages.success(self.request,
                              'Вече имате абонамент за този план!')
             return HttpResponseRedirect(reverse('home'))
@@ -63,13 +70,10 @@ class CreateCheckoutSessionView(View):
         if product_id == 1:
             messages.warning(self.request,
                              'Ако желаете да преминете към безплатния абонамент, '
-                             'моля първо деактивирайте сегашния си план от настройките в профила си!')
+                             'моля първо деактивирайте платения си план от настройките в профила си!')
             return HttpResponseRedirect(reverse('home'))
 
-        for customer in stripe.Customer.list().data:
-            if customer['email'] == current_user_email:
-                current_customer_id = customer['id']
-                break
+        current_customer_id = find_stripe_customer(current_user_email=current_user_email)
 
         if current_customer_id != '':
             for sub in stripe.Subscription.list().data:
