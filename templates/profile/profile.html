@@ -166,23 +166,25 @@
                                     <p>{{ subscription_plan }}</p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Следващо плащане по абонамент</label>
+                            {% if is_subscription_plan_paid %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Следващо плащане по абонамент</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ next_invoice_date }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p>{{ next_invoice_date }}</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Деактивирай абонамент</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="{% url 'cancel-subscription' %}">
+                                            ТУК</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Деактивирай абонамент</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="{% url 'cancel-subscription' %}">
-                                        ТУК</a>
-                                </div>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

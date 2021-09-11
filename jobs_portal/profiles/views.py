@@ -15,7 +15,7 @@ import stripe
 
 from datetime import datetime
 
-from utils.find_stripe_customer import find_stripe_customer
+from utils.find_stripe_info import find_stripe_customer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -55,6 +55,7 @@ class ShowProfilePage(DetailView):
         context['page_user'] = user.profilemodel
         context['jobs'] = profile_jobs
         context['subscription_plan'] = subscription_plan
+        context['is_subscription_plan_paid'] = True if current_customer_id else False
         context['next_invoice_date'] = next_invoice_date
         return context
 

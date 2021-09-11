@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -14,7 +14,7 @@ from django.views.generic import TemplateView
 import stripe
 from django.conf import settings
 from jobs_portal.payments.models import Payments, UserSubscriptionPlan
-from utils.find_stripe_customer import find_stripe_customer
+from utils.find_stripe_info import find_stripe_customer, find_customer_subscription
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -41,10 +41,25 @@ class PricingListView(TemplateView):
     template_name = 'pricing-list.html'
 
 
-class CancelSubscriptionView(View):
-    def post(self, request, *args, **kwargs):
-        
-        return reverse("profile", kwargs={'pk': kwargs['pk']})
+def cancel_subscription(request):
+    customer = find_stripe_customer(current_user_email=request.user.email)
+    subscription_to_delete = find_customer_subscription(current_customer_id=customer)
+
+    if request.method == 'GET':
+        context = {
+            'form': 'form',
+        }
+        return render(request, 'payments/cancel-subscription.html', context)
+    else:
+        stripe.Subscription.delete(subscription_to_delete)
+        stripe.Customer.delete(customer)
+
+        current_user = UserSubscriptionPlan.objects.get(user=request.user.id)
+        current_user.subscription_plan = Payments.objects.get(pk=1)
+        current_user.save()
+
+        messages.warning(request, 'Успешно деактивирахте абонамента си!')
+        return redirect(reverse('profile', kwargs={'pk': request.user.id}))
 
 
 @method_decorator(login_required, name='dispatch')
@@ -74,12 +89,7 @@ class CreateCheckoutSessionView(View):
             return HttpResponseRedirect(reverse('home'))
 
         current_customer_id = find_stripe_customer(current_user_email=current_user_email)
-
-        if current_customer_id != '':
-            for sub in stripe.Subscription.list().data:
-                if sub['customer'] == current_customer_id:
-                    subscription_to_delete = sub['id']
-                    break
+        subscription_to_delete = find_customer_subscription(current_customer_id=current_customer_id)
 
         domain = request.META['HTTP_ORIGIN']
 

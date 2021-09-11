@@ -13,3 +13,15 @@ def find_stripe_customer(current_user_email):
             break
 
     return current_customer_id
+
+
+def find_customer_subscription(current_customer_id):
+    subscription_to_delete = ''
+
+    if current_customer_id != '':
+        for sub in stripe.Subscription.list().data:
+            if sub['customer'] == current_customer_id:
+                subscription_to_delete = sub['id']
+                break
+
+    return subscription_to_delete

@@ -1,0 +1,28 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login_page.css"/>
+
+    <br>
+
+    <section class="form rounded">
+        <img src="/static/images/laborers.png" alt="">
+
+        <form method="POST" action="#">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p style="text-align: center;">
+                <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Деактивирай Абонамент</button>
+            </p>
+        </form>
+
+        <img class="img-2" src="/static/images/logo.png" alt="">
+
+    </section>
+
+    <br>
+    <hr width="1200px">
+    <br>
+
+    {% include 'shared/footer.html' %}
+{% endblock %}
