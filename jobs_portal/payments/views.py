@@ -62,6 +62,7 @@ def cancel_subscription(request):
         return redirect(reverse('profile', kwargs={'pk': request.user.id}))
 
 
+@csrf_exempt
 @method_decorator(login_required, name='dispatch')
 class CreateCheckoutSessionView(View):
     PRODUCT_IDS = {
