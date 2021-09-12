@@ -73,4 +73,5 @@ class JobApplicationForm(BootstrapFormMixin, forms.Form):
     cv_file = forms.FileField(
         widget=forms.FileInput(attrs={'label': 'CV', 'placeholder': 'CV'}),
         label='CV',
+        required=False,
     )
