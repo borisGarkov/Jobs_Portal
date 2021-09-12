@@ -131,6 +131,9 @@ class JobApplicationView(FormView):
         last_name = form.cleaned_data['last_name']
         email_address = form.cleaned_data['email_address']
         cv_file = form.cleaned_data['cv_file']
+        phone_number = form.cleaned_data['telephone']
+
+        phone_number = f'0{phone_number}' if ~str(phone_number).startswith('0') else phone_number
 
         mail_subject = 'Кандидатура за ваша обява'
 
@@ -140,6 +143,8 @@ class JobApplicationView(FormView):
             'first_name': first_name,
             'last_name': last_name,
             'email': email_address,
+            'phone_number': phone_number,
+            'cv_file': True if cv_file else False,
         })
 
         email = EmailMessage(
