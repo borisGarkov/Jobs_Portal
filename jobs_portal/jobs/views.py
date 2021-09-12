@@ -150,7 +150,8 @@ class JobApplicationView(FormView):
             bcc=['rentahandbg@gmail.com'],
         )
 
-        email.attach(cv_file.name, cv_file.read(), cv_file.content_type)
+        if cv_file:
+            email.attach(cv_file.name, cv_file.read(), cv_file.content_type)
 
         email.send()
 
