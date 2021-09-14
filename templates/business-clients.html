@@ -1,0 +1,71 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+
+    <section class="sub-header" style="background: white; align-items: center;">
+        <article class="sub-header-left">
+            <img src="/static/images/companies-6.png" alt="work to be done" style="width: 410px; height:280px">
+        </article>
+
+        <article class="sub-header-right">
+            <h2>Какво предлагаме?</h2>
+
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p><strong style="color: #146CB4">Rent</strong> <strong style="color: #F47424">A Hand</strong> ви
+                    осигурява работна ръка за извършването на конкретна
+                    дейност или проект.</p>
+            </div>
+
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p>Ние ви предлагаме различни видове услуги като можем да намерим
+                    подходящите хора за вас в широк спектър от дейности, като разтоварване,
+                    подреждане, пакетиране, подбор срок на годност, вид на продукта и други на
+                    асортимента и почистване на обекта.</p>
+            </div>
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p>Също така предлагаме възможност за Вас да ни наемете за вашите
+                    вентилационни, отоплителни, климатични и водопроводни системи. Като
+                    предлагаме цялостно проектиране, изграждане и поддръжка без да е
+                    необходимо Вие да се притеснявате за експлоатацията на съоръженията.</p>
+            </div>
+        </article>
+    </section>
+
+    <section class="main-header" style="background: white; margin-bottom: 50px">
+        <article class="main-header-left" style="margin-bottom: 50px">
+            <p class="lead">
+                <strong style="color: #146CB4">Rent A</strong> <strong style="color: #F47424">Hand</strong> ви помага да
+                оптимизирате вашите разходи и също така ви
+                предоставя възможността да видите качеството на работата на наетите хора
+                от първо лице, без да се обвързвате дългосрочно с тях.
+                Екипът ни Ви спестява време, за намиране на хората, от които се нуждаете.
+                Това ви спестява изключително много разходи, като ежемесечна гарантирана
+                заплата, разходи за осигуровки и още един куп допълнителни харчове, които
+                може да спестите.
+                Ако останете доволни от тяхната работа, вашата фирма може отново да се
+                свърже с нас.
+            </p>
+        </article>
+
+        <article class="main-header-right">
+            <h2>Пишете ни</h2>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.first_name }}
+                {{ form.last_name }}
+                {{ form.email_address }}
+                {{ form.message }}
+                <br>
+                <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Изпрати</button>
+            </form>
+        </article>
+    </section>
+
+    <hr width="1100px">
+    {% include 'shared/footer.html' %}
+
+{% endblock %}

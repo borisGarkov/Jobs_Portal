@@ -80,6 +80,11 @@ class ContactsView(FormView):
         return HttpResponseRedirect(reverse('contacts'))
 
 
+class BusinessClientsView(FormView):
+    form_class = ContactForm
+    template_name = 'business-clients.html'
+
+
 def search(request):
     if request.method == 'POST':
         searched_text = request.POST['searched'].lower().strip()

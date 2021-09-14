@@ -9,11 +9,14 @@
     </p>
     <br>
 
-    <div id="myBtnContainer" style="text-align: center;">
-        <button class="btn btn-light" onclick="filterSelection('all')">Покажи Всички</button>
+    <div id="myBtnContainer" style="text-align: center; max-width: 1200px; margin: auto;">
+        <button class="btn btn-light" style="margin-bottom: 10px"
+                onclick="filterSelection('all')">Покажи Всички
+        </button>
 
         {% for cat in categories %}
-            <button class="btn btn-light" onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
+            <button class="btn btn-light" style="margin-bottom: 10px"
+                    onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
         {% endfor %}
     </div>
 
