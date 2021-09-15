@@ -57,8 +57,13 @@
                             </div>
                             <h5 class="">Заплащане</h5>
                             <div class="bootstrap-tagsinput">
-                                <span class="tag label label-info">{{ job.salary }}<span
-                                        data-role="remove"></span></span> лв. {{ job.salary_type }}
+                                {% if job.salary %}
+                                    <span class="tag label label-info">{{ job.salary }}<span
+                                            data-role="remove"></span></span> лв. {{ job.salary_type }}
+                                {% else %}
+                                    <span class="tag label label-info">{{ job.salary_type }}<span
+                                            data-role="remove"></span></span>
+                                {% endif %}
                             </div>
 
                         </div>
