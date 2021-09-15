@@ -2,6 +2,11 @@
 
 {% block content %}
 
+    <div class="title" style="max-width: 1200px; margin: 50px auto;">
+        <h1>Бизнес Клиенти</h1>
+        <hr>
+    </div>
+
     <section class="sub-header" style="background: white; align-items: center;">
         <article class="sub-header-left">
             <img src="/static/images/companies-6.png" alt="work to be done" style="width: 410px; height:280px">
@@ -36,18 +41,31 @@
 
     <section class="main-header" style="background: white; margin-bottom: 50px">
         <article class="main-header-left" style="margin-bottom: 50px">
-            <p class="lead">
-                <strong style="color: #146CB4">Rent A</strong> <strong style="color: #F47424">Hand</strong> ви помага да
-                оптимизирате вашите разходи и също така ви
-                предоставя възможността да видите качеството на работата на наетите хора
-                от първо лице, без да се обвързвате дългосрочно с тях.
-                Екипът ни Ви спестява време, за намиране на хората, от които се нуждаете.
-                Това ви спестява изключително много разходи, като ежемесечна гарантирана
-                заплата, разходи за осигуровки и още един куп допълнителни харчове, които
-                може да спестите.
-                Ако останете доволни от тяхната работа, вашата фирма може отново да се
-                свърже с нас.
-            </p>
+            <h2>Предимства?</h2>
+
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p><strong style="color: #146CB4">Rent</strong> <strong style="color: #F47424">A Hand</strong> ви помага
+                    да оптимизирате вашите разходи и също така ви
+                    предоставя възможността да видите качеството на работата на наетите хора
+                    от първо лице, без да се обвързвате дългосрочно с тях.</p>
+            </div>
+
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p>Екипът ни Ви спестява време, за намиране на хората, от които се нуждаете.</p>
+            </div>
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p>Това ви спестява изключително много разходи, като ежемесечна гарантирана
+                    заплата, разходи за осигуровки и още един куп допълнителни харчове, които
+                    може да спестите.</p>
+            </div>
+            <div class="sub-points">
+                <img src="/static/images/check.png" width="20" height="" alt="">
+                <p>Ако останете доволни от тяхната работа, вашата фирма може отново да се
+                    свърже с нас.</p>
+            </div>
         </article>
 
         <article class="main-header-right">
@@ -56,8 +74,11 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.first_name }}
+                <p></p>
                 {{ form.last_name }}
+                <p></p>
                 {{ form.email_address }}
+                <p></p>
                 {{ form.message }}
                 <br>
                 <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Изпрати</button>

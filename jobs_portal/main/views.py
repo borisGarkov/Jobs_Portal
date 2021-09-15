@@ -84,6 +84,27 @@ class BusinessClientsView(FormView):
     form_class = ContactForm
     template_name = 'business-clients.html'
 
+    def form_valid(self, form):
+        email_subject = "Website Inquiry"
+
+        message = render_to_string('messages/website_question_form.html', {
+            'first_name': form.cleaned_data['first_name'],
+            'last_name': form.cleaned_data['last_name'],
+            'email': form.cleaned_data['email_address'],
+            'message': form.cleaned_data['message'],
+        })
+
+        email = EmailMessage(
+            subject=email_subject,
+            body=message,
+            to=['rentahandbg@gmail.com'],
+            cc=['boris.garkov@abv.bg'],
+        )
+
+        email.send()
+        messages.info(self.request, 'Благодарим Ви за имейла!')
+        return HttpResponseRedirect(reverse('contacts'))
+
 
 def search(request):
     if request.method == 'POST':
