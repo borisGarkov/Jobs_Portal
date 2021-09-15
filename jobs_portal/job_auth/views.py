@@ -104,6 +104,7 @@ class PasswordResetRequest(FormView):
     def form_valid(self, form):
         user_email = form.cleaned_data['email']
         associated_user = UserModel.objects.filter(email=user_email)
+        current_site = get_current_site(self.request)
 
         if associated_user.exists():
             user = associated_user[0]
@@ -112,7 +113,7 @@ class PasswordResetRequest(FormView):
 
             message = render_to_string(email_template_name, {
                 "email": user.email,
-                'domain': '127.0.0.1:8000',
+                'domain': current_site.domain,
                 'site_name': 'Website',
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,
