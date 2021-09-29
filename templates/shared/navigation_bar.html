@@ -50,9 +50,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'pricing-list' %}">Ценови Лист</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'contacts' %}">Контакти</a>
-            </li>
+            {#            <li class="nav-item">#}
+            {#                <a class="nav-link" href="{% url 'contacts' %}">Контакти</a>#}
+            {#            </li>#}
+
             {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -73,8 +74,12 @@
             {% endif %}
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" method="post" action="{% url 'search all pages' %}">
+        <div class="form-inline my-2 my-lg-0">
             {% if user.is_authenticated %}
+                <button class="btn btn-primary my-2 my-sm-0" type="submit"
+                        style="margin-right: 15px;">
+                    <a href="{% url 'create job' %}" style="text-decoration: none; color: inherit;">Създай обява</a>
+                </button>
                 <div class="online">
                     <a href="{% url 'profile' user.id %}">
                         <img src="{{ user.profilemodel.profile_photo.url }}" width="117" height="41"
@@ -82,10 +87,13 @@
                     </a>
                 </div>
             {% endif %}
-            {% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="Търси" aria-label="Search" name="searched">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Търси</button>
-        </form>
+        </div>
+
+        {#        <form class="" method="post" action="{% url 'create job' %}">#}
+        {##}
+        {#            {% csrf_token %}#}
+        {#                        <input class="form-control mr-sm-2" type="search" placeholder="Търси" aria-label="Search" name="searched">#}
+        {#        </form>#}
     </div>
 </nav>
 
