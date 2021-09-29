@@ -18,10 +18,15 @@ UserModel = get_user_model()
 class HomeView(ListView):
     model = JobModel
     template_name = 'home.html'
-    context_object_name = 'jobs'
+    # context_object_name = 'jobs'
 
-    def get_queryset(self):
-        return JobModel.objects.order_by('-id')[:4]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['looking_for_people_jobs'] = [job for job in JobModel.objects.order_by('-id') if
+                                              job.work_type == 'Търся Хора'][:4]
+        context['offer_jobs'] = [job for job in JobModel.objects.order_by('-id') if
+                                 job.work_type == 'Предлагам Услуга'][:4]
+        return context
 
 
 class AllJobsView(TemplateView):
