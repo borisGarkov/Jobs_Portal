@@ -29,7 +29,7 @@ class ProfileModel(models.Model):
         validators=[validate_img_extensions],
     )
     profession = models.CharField(
-        max_length=20,
+        max_length=40,
         blank=True,
         null=True,
         validators=[MinLengthValidator(2, 'Моля въведете поне 2 символа!')],
