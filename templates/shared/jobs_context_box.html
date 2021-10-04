@@ -13,10 +13,22 @@
                         <div class="card-heading">
                             {{ job.title }}
                         </div>
-                        <div class="card-text">
-                            {{ job.city }}
-                        </div>
-                        <a href="{% url 'details job' job.id %}" class="card-button"> Виж Повече</a>
+                        {% if job.user.usersubscriptionplan.subscription_plan_id == 3 %}
+                            <div class="card-sub-text">
+                                <div class="card-text">
+                                    {{ job.city }}
+                                </div>
+                                <div class="card-text">
+                                    <strong>Премиум обява</strong>
+                                </div>
+                            </div>
+                            <a href="{% url 'details job' job.id %}" class="card-premium"> Виж Повече</a>
+                        {% else %}
+                            <div class="card-text">
+                                {{ job.city }}
+                            </div>
+                            <a href="{% url 'details job' job.id %}" class="card-button"> Виж Повече</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

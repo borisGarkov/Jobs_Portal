@@ -75,6 +75,27 @@ a {
 }
 
 
+.card-premium {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    width: 100%;
+    background-color: #660e7a;
+    color: #fff;
+    border-radius: 0 0 8px 8px;
+}
+
+.card-sub-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-premium:hover {
+    text-decoration: none;
+    background-color: #1D3461;
+    color: #fff;
+}
+
 @-webkit-keyframes pulse {
     0% {
         -moz-transform: scale(0.9);
