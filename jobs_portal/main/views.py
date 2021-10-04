@@ -18,6 +18,7 @@ UserModel = get_user_model()
 class HomeView(ListView):
     model = JobModel
     template_name = 'home.html'
+
     # context_object_name = 'jobs'
 
     def get_context_data(self, **kwargs):
@@ -42,6 +43,7 @@ class LookingForJobsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['jobs'] = [job for job in JobModel.objects.all() if job.work_type == 'Търся Хора']
+        context['jobs'] = sorted(context['jobs'], key=lambda job: -job.user.usersubscriptionplan.subscription_plan_id)
         context['categories'] = [cat[0] for cat in JobModel.WORK_CATEGORIES]
         return context
 
@@ -55,6 +57,7 @@ class OfferJobsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['jobs'] = [job for job in JobModel.objects.all() if job.work_type == 'Предлагам Услуга']
+        context['jobs'] = sorted(context['jobs'], key=lambda job: -job.user.usersubscriptionplan.subscription_plan_id)
         context['categories'] = [cat[0] for cat in JobModel.WORK_CATEGORIES]
         return context
 
