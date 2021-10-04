@@ -29,6 +29,7 @@ class JobForm(BootstrapFormMixin, forms.ModelForm):
             'salary': 'Заплата',
             'salary_type': 'Вид заплата',
             'work_category': 'Категория',
+            'work_type': 'Тип Работа',
         }
 
 
@@ -48,7 +49,7 @@ class UpdateJobForm(BootstrapFormMixin, forms.ModelForm):
         }
 
 
-class JobApplicationForm(BootstrapFormMixin, forms.Form):
+class JobBaseForm(BootstrapFormMixin, forms.Form):
     first_name = forms.CharField(
         max_length=50,
         validators=[MinLengthValidator(2, 'Моля въведете поне 2 символа!')],
@@ -70,8 +71,19 @@ class JobApplicationForm(BootstrapFormMixin, forms.Form):
         widget=forms.NumberInput(attrs={'placeholder': 'Телефонен номер'}),
         label='Телефонен номер',
     )
+
+
+class JobApplicationForm(JobBaseForm):
     cv_file = forms.FileField(
         widget=forms.FileInput(attrs={'label': 'CV', 'placeholder': 'CV'}),
         label='CV',
+        required=False,
+    )
+
+
+class JobConnectWithJobPoster(JobBaseForm):
+    text_message = forms.CharField(
+        widget=forms.Textarea(attrs={'placeholder': 'Съобщение'}),
+        label='Съобщение',
         required=False,
     )

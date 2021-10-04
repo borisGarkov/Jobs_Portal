@@ -1,0 +1,24 @@
+{% extends 'shared/navigation_bar.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="/static/css/login_page.css"/>
+
+    <section class="form rounded">
+        <h2 style="text-align: center;">Изпрати запитване за тази обява</h2>
+        <img src="/static/images/labor-day.png" alt="">
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Свържи се</button>
+        </form>
+
+        <img class="img-2" src="/static/images/logo.png" alt="">
+
+    </section>
+
+
+
+{% endblock %}

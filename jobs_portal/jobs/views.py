@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, FormView
 from django.contrib import messages
 
-from jobs_portal.jobs.forms import JobForm, UpdateJobForm, JobApplicationForm
+from jobs_portal.jobs.forms import JobForm, UpdateJobForm, JobApplicationForm, JobConnectWithJobPoster
 from jobs_portal.jobs.models import JobModel, Comments
 
 UserModel = get_user_model()
@@ -161,4 +161,50 @@ class JobApplicationView(FormView):
         email.send()
 
         messages.success(self.request, 'Успешно кандидатствахте за тази позиция!')
+        return HttpResponseRedirect(reverse('home'))
+
+
+@method_decorator(login_required, name='dispatch')
+class JobConnectWithJobPosterView(FormView):
+    form_class = JobConnectWithJobPoster
+    template_name = 'jobs/job_connect_form.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        current_job = JobModel.objects.get(pk=self.kwargs['pk'])
+
+        job_creator_email = current_job.user.email
+        job_creator_username = current_job.user.username
+
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        email_address = form.cleaned_data['email_address']
+        text_message = form.cleaned_data['text_message']
+        phone_number = form.cleaned_data['telephone']
+
+        phone_number = f'0{phone_number}' if ~str(phone_number).startswith('0') else phone_number
+
+        mail_subject = 'Изпратено запитване за ваша обява'
+
+        message = render_to_string('jobs/send_job_connect_email.html', {
+            'job_creator_username': job_creator_username,
+            'title': current_job.title,
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email_address,
+            'phone_number': phone_number,
+            'text_message': text_message,
+        })
+
+        email = EmailMessage(
+            subject=mail_subject,
+            body=message,
+            from_email=email_address,
+            to=[job_creator_email],
+            bcc=['rentahandbg@gmail.com'],
+        )
+
+        email.send()
+
+        messages.success(self.request, 'Успешно изпратихте запитване за тази позиция!')
         return HttpResponseRedirect(reverse('home'))
