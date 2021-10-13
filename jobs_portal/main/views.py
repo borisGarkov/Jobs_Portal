@@ -34,32 +34,36 @@ class AllJobsView(TemplateView):
     template_name = 'all_jobs_pages/all-jobs-page.html'
 
 
-class LookingForJobsView(ListView):
+class JobsPageBaseView(ListView):
     model = JobModel
-    template_name = 'all_jobs_pages/show-all-jobs-template.html'
+    template_name = ''
     context_object_name = 'jobs'
-    paginate_by = 12
+    paginate_by = 4
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['jobs'] = [job for job in JobModel.objects.all() if job.work_type == 'Търся Хора']
-        context['jobs'] = sorted(context['jobs'], key=lambda job: -job.user.usersubscriptionplan.subscription_plan_id)
         context['categories'] = [cat[0] for cat in JobModel.WORK_CATEGORIES]
+        context['jobs'] = sorted(context['jobs'], key=lambda job: -job.user.usersubscriptionplan.subscription_plan_id)
         return context
 
 
-class OfferJobsView(ListView):
+class LookingForJobsView(JobsPageBaseView):
     model = JobModel
     template_name = 'all_jobs_pages/show-all-jobs-template.html'
-    context_object_name = 'jobs'
-    paginate_by = 12
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['jobs'] = [job for job in JobModel.objects.all() if job.work_type == 'Предлагам Услуга']
-        context['jobs'] = sorted(context['jobs'], key=lambda job: -job.user.usersubscriptionplan.subscription_plan_id)
-        context['categories'] = [cat[0] for cat in JobModel.WORK_CATEGORIES]
-        return context
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        qs = JobModel.objects.filter(work_type='Търся Хора')
+        return qs
+
+
+class OfferJobsView(JobsPageBaseView):
+    template_name = 'all_jobs_pages/show-all-jobs-template.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        qs = JobModel.objects.filter(work_type='Предлагам Услуга')
+        return qs
 
 
 class ContactsView(FormView):

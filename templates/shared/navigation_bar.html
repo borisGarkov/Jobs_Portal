@@ -19,6 +19,8 @@
 
     <script src="/static/js/all-jobs-page.js"></script>
 
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+
     <link rel="icon" type="image/png" href="/static/images/main_icon.jpg">
     <title>{% block head_title %}Портал за Работа{% endblock %}</title>
 </head>
@@ -62,7 +64,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'profile' user.id %}">Профил</a>
-{#                        <a class="dropdown-item" href="{% url 'create job' %}">Създай обява за работа</a>#}
+                        {#                        <a class="dropdown-item" href="{% url 'create job' %}">Създай обява за работа</a>#}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Изход</a>
                     </div>
