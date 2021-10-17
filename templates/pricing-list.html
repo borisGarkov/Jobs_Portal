@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    <link rel="stylesheet" type="text/css" href="/static/css/accordion.css">
+
     <br/><br>
 
     <div class="container p-0">
@@ -141,55 +143,45 @@
                         </div>
                     </div>
                 </div>
-
                 <hr>
-
-                <div class="text-center my-4">
-                    <h2 style="text-align: center;">Често Задавани Въпроси?</h2>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6 ml-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Как мога да платя за месечен абонамент?</h5>
-                                <p class="mb-0">Плащането се извършва само чрез кредитна/дебитна карта.</p>
-                            </div>
+                <br/><br>
+                <h2>Често Задавани Въпроси?</h2>
+                <br/><br>
+                <div class="accordion-wrapper">
+                    <div class="accordion">
+                        <input type="radio" name="radio-a" id="check1" checked>
+                        <label class="accordion-label" for="check1">Как мога да платя за месечен абонамент?</label>
+                        <div class="accordion-content">
+                            <p>Плащането се извършва само чрез кредитна/дебитна карта.</p>
                         </div>
                     </div>
-                    <div class="col-md-5 col-sm-6 mr-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Предлагате ли безплатен тестов период?</h5>
-                                <p class="mb-0">Всички регистрирани потребители автоматично получават нашията безплатен
-                                    пакет, който ви дава възможносто да споделите 1 обява за срок от 30 дни.</p>
-                            </div>
+                    <div class="accordion">
+                        <input type="radio" name="radio-a" id="check2">
+                        <label class="accordion-label" for="check2">Предлагате ли безплатен тестов период?</label>
+                        <div class="accordion-content">
+                            <p>Всички регистрирани потребители автоматично получават нашията безплатен
+                                пакет, който ви дава възможносто да споделите 1 обява за срок от 30 дни.</p>
                         </div>
                     </div>
-                    <div class="col-md-5 col-sm-6 ml-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Мога ли да прекратя плана си предварително?</h5>
-                                <p class="mb-0">Можете да прекратите абонамента си по всяко едно време.</p>
-                            </div>
+                    <div class="accordion">
+                        <input type="radio" name="radio-a" id="check3">
+                        <label class="accordion-label" for="check3">Мога ли да прекратя плана си предварително?</label>
+                        <div class="accordion-content">
+                            <p>Можете да прекратите абонамента си по всяко едно време.</p>
                         </div>
                     </div>
-                    <div class="col-md-5 col-sm-6 mr-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Друг Въпрос?</h5>
-                                <p class="mb-0">При други въпроси, моля свържете се с нас!</p>
-                            </div>
+                    <div class="accordion">
+                        <input type="radio" name="radio-a" id="check4">
+                        <label class="accordion-label" for="check4">Друг Въпрос?</label>
+                        <div class="accordion-content">
+                            <p>При други въпроси, моля свържете се с нас!</p>
                         </div>
                     </div>
                 </div>
+                <br/><br>
             </div>
-        </div>
 
-    </div>
+            <hr width="1100">
 
-    <br/><br>
-
-    <hr width="1100">
-
-    {% include 'shared/footer.html' %}
+            {% include 'shared/footer.html' %}
 {% endblock %}
