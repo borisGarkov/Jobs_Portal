@@ -32,7 +32,7 @@ input {
     -webkit-box-pack: justify;
     justify-content: space-between;
     padding: 16px;
-    background: rgba(4, 57, 94, .8);
+    background: #146CB4;
     font-weight: bold;
     cursor: pointer;
     font-size: 20px;
