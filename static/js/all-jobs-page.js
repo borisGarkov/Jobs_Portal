@@ -41,12 +41,18 @@ function w3RemoveClass(element, name) {
 }
 
 // Add active class to the current control button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn btn-light");
-for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function () {
-        var current = document.getElementsByClassName("btn btn-info");
-        current[0].className = current[0].className.replace(" btn btn-info", "");
-        this.className = " btn btn-info";
-    });
+let btnContainer = document.getElementById("myBtnContainer");
+let btns = Array.from(document.getElementsByClassName("btn btn-light"));
+btnContainer.addEventListener('click', onBtnClick);
+
+function onBtnClick(e) {
+    e.target.classList.add('active');
+    let btnTargetInnerText = e.target.innerText;
+
+    for (const currentBtn of btns) {
+        if (currentBtn.innerText == btnTargetInnerText) {
+            continue;
+        }
+        currentBtn.classList.remove('active');
+    }
 }
