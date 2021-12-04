@@ -31,7 +31,7 @@ a {
 
 .card-image img {
     height: 134px;
-    /*max-width: 100%;*/
+    max-width: 100%;
     width: 255px;
     object-fit: cover;
     object-position: top;
