@@ -179,3 +179,4 @@ STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 # SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 RECAPTCHA_PUBLIC_KEY = '6Lc-zcgdAAAAABRD3_EVM1ULrrojKjSbpEKKApma'
 RECAPTCHA_PRIVATE_KEY = '6Lc-zcgdAAAAAF1tBenzItZzmmYuS4I5NA_4jcAg'
+RECAPTCHA_DOMAIN = 'www.recaptcha.net'

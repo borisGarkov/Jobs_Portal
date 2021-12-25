@@ -25,4 +25,4 @@ class ContactForm(BootstrapFormMixin, forms.Form):
         widget=forms.Textarea(attrs={'rows': 5, 'label': 'Съобщение', 'placeholder': 'Съобщение'}),
         max_length=2000,
     )
-    captcha = ReCaptchaField()
+    captcha = ReCaptchaV3()
