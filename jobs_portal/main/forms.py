@@ -3,7 +3,7 @@ from django.core.validators import MinLengthValidator
 
 from utils.forms import BootstrapFormMixin
 
-from captcha.fields import ReCaptchaField
+from captcha.fields import ReCaptchaField, ReCaptchaV3
 
 
 class ContactForm(BootstrapFormMixin, forms.Form):
@@ -26,4 +26,3 @@ class ContactForm(BootstrapFormMixin, forms.Form):
         max_length=2000,
     )
     captcha = ReCaptchaField()
-
