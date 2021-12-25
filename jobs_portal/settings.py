@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'jobs_portal.payments',
 
     'ckeditor',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -174,3 +175,7 @@ STRIPE_FREE_PLAN_ID = os.environ.get('STRIPE_FREE_PLAN_ID')
 STRIPE_STANDARD_PLAN_ID = os.environ.get('STRIPE_STANDARD_PLAN_ID')
 STRIPE_PREMIUM_PLAN_ID = os.environ.get('STRIPE_PREMIUM_PLAN_ID')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
+
+# SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+RECAPTCHA_PUBLIC_KEY = '6Lc-zcgdAAAAABRD3_EVM1ULrrojKjSbpEKKApma'
+RECAPTCHA_PRIVATE_KEY = '6Lc-zcgdAAAAAF1tBenzItZzmmYuS4I5NA_4jcAg'
