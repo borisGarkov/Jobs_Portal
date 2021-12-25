@@ -1,3 +1,4 @@
+from captcha.widgets import ReCaptchaV2Invisible
 from django import forms
 from django.core.validators import MinLengthValidator
 
@@ -25,4 +26,4 @@ class ContactForm(BootstrapFormMixin, forms.Form):
         widget=forms.Textarea(attrs={'rows': 5, 'label': 'Съобщение', 'placeholder': 'Съобщение'}),
         max_length=2000,
     )
-    captcha = ReCaptchaV3()
+    captcha = ReCaptchaField(widget=ReCaptchaV2Invisible)
