@@ -1,70 +1,116 @@
-
-.proile-rating {
-    font-size: 12px;
-    color: #818182;
-    margin-top: 5%;
+* {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    size: 16px;
 }
 
-.proile-rating span {
-    color: #495057;
-    font-size: 15px;
+.profile_img {
+    text-align: center;
+    box-shadow: 0px 15px 40px #eaf0f7;
+    border-radius: 0 0 20px 20px;
+    max-width: 800px;
+    margin: 5rem auto 5rem;
+}
+
+.my_profile_header {
+    position: absolute;
+    font-weight: 400;
+}
+
+.name_header {
     font-weight: 600;
 }
 
-.profile-head .nav-tabs {
-    margin-bottom: 5%;
+.profession, .registration_date {
+    font-weight: 300;
 }
 
-.profile-head .nav-tabs .nav-link {
-    font-weight: 600;
-    border: none;
+.profile_img > img {
+    max-width: 15%;
+    object-fit: contain;
+    clip-path: circle(37%);
 }
 
-.profile-head .nav-tabs .nav-link.active {
-    border: none;
-    border-bottom: 2px solid #0062cc;
+.social_media_links {
+    display: flex;
+    justify-content: space-around;
 }
 
-.profile-work {
-    padding: 14%;
-    margin-top: -15%;
-}
-
-.profile-work p {
-    font-size: 15px;
-    color: #818182;
-    font-weight: 600;
-}
-
-.profile-work a {
+.social_media_links a, p {
     text-decoration: none;
-    color: #495057;
-    font-weight: 600;
-    font-size: 14px;
+    color: inherit;
+    margin-left: 5px;
+    font-weight: 300;
 }
 
-.profile-work ul {
-    list-style: none;
+.fa-home {
+    color: #1fad83;
 }
 
-.profile-tab label {
-    font-weight: 600;
+.fa-facebook, .fa-linkedin {
+    color: #2e9ad0;
 }
 
-.profile-tab p {
-    font-weight: 600;
-    color: #0062cc;
+.fa-instagram {
+    color: #ca402b;
 }
 
-.boxes {
-    justify-content: space-between;
+.edit_section {
+    text-align: center;
+    box-shadow: 10px -15px 40px #eaf0f7;
+    border-radius: 0 0 20px 20px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    padding-top: 1rem;
 }
 
-.container {
-    margin-top: 0;
+.edit_section > img {
+    width: 1rem;
 }
 
-/*.blue-color-background {*/
-/*    background: rgb(205, 224, 239);*/
-/*}*/
+.edit_section > .fa-pencil-square-o {
+    color: #146cb4;
+}
 
+.edit_section_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.edit_section_buttons > a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 300;
+}
+
+.edit_section_buttons > a:hover {
+    color: #146cb4;
+}
+
+.subscription_section {
+    text-align: center;
+    box-shadow: 0 -15px 40px #eaf0f7;
+    border-radius: 0 0 20px 20px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    padding-top: 1rem;
+}
+
+.subscription_section > .fa-address-card-o {
+    color: #f37327;
+}
+
+.subscription_section_sub {
+    padding-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.bolder {
+    font-weight: 400;
+}
+
+.subscription_section_sub > p > a {
+    text-decoration: none;
+}

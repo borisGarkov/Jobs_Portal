@@ -1,14 +1,14 @@
 .form {
-    margin: 20px auto;
+    margin: 5rem auto;
     max-width: 58%;
     padding: 50px 20px;
-    border: 1px solid rgb(213,218,223);
+    border: 1px solid rgb(213, 218, 223);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.form img {
+.form > img {
     max-width: 100px;
     display: block;
     margin-left: auto;

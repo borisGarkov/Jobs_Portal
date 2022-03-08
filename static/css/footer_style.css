@@ -1,0 +1,127 @@
+html {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+hr {
+    max-width: 1200px;
+    background-color: #eee;
+    border: 0 none;
+    color: #eee;
+    height: 2px;
+}
+
+.footer {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer_mini_header {
+    font-weight: 700;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    text-decoration: none;
+
+}
+
+.footer_mini_text {
+    font-weight: 400;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    text-decoration: none;
+
+}
+
+.is_link {
+    color: #146CB4;
+}
+
+.is_link:hover {
+    color: #1D3461;
+}
+
+.footer_rent_a_hand {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_rent_a_hand img {
+    max-width: 100px;
+}
+
+.footer_pages {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_links {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_contacts {
+    display: flex;
+    flex-direction: column;
+}
+
+.email {
+    color: darkorange;
+}
+
+.phone {
+    color: #146CB4;
+}
+
+.fas {
+    margin-right: 0.9rem;
+}
+
+.sub_footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.sub_footer_copyright {
+    padding-bottom: 10px;
+    font-weight: 400;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.sub_footer_copyright strong {
+    color: #146CB4;
+    margin-bottom: 50px;
+}
+
+.sub_footer_links {
+    text-align: right;
+}
+
+.sub_footer_links ul li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 10px;
+    color: #146CB4;
+}
+
+/* phones */
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 10px;
+    }
+
+    .footer_rent_a_hand {
+        display: none;
+    }
+}

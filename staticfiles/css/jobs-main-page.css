@@ -1,14 +1,16 @@
 .main-row {
     display: flex;
     justify-content: center;
-    align-content: space-between;
+    align-items: center;
     max-width: 1200px;
-    margin: 100px auto 100px auto;
+    margin: 3rem auto;
 }
 
-h3 {
-    margin: 50px auto;
+.choose_category {
+    margin-top: 5rem;
     text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
 }
 
 .content-box i {
@@ -17,6 +19,10 @@ h3 {
 
 .content-box h6 {
     color: #146CB4;
+}
+
+.content-box > img {
+    max-width: 15rem;
 }
 
 .content-box {
@@ -32,10 +38,18 @@ h3 {
     cursor: pointer;
     padding: 12px 16px 24px;
     margin-right: 18px;
-    max-width: 350px;
+    max-width: 20rem;
 }
 
 
 .content-box:hover {
     transform: scale(1.05);
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    .main-row {
+        flex-direction: column;
+        row-gap: 2rem;
+    }
 }

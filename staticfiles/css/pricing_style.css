@@ -1,0 +1,174 @@
+html {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+}
+
+.title_1, .title_2, .title_3 {
+    margin: 0 auto 1rem;
+    text-align: center;
+}
+
+.title_1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.title_2 {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.title_3 {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+#standard_packages {
+    margin-right: 0;
+}
+
+#personalised_packages {
+    margin-left: 0;
+}
+
+.pricing {
+    margin-top: 5rem;
+}
+
+.pricing_info_section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pricing_info_subsection {
+    border: 1.5px solid #efefef;
+    border-radius: 3.5px;
+    width: 260px;
+    max-height: 600px;
+}
+
+.pricing_info_subsection > p {
+    line-height: 1.2;
+    text-align: center;
+}
+
+.package {
+    color: #212529;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.padding_added {
+    padding: 1rem;
+}
+
+.price {
+    font-weight: 300;
+    font-size: 3.25rem;
+}
+
+.includes {
+    font-size: 1.20rem;
+    font-weight: 500;
+}
+
+.add_info {
+    padding: 10px;
+}
+
+.button_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_wrapper {
+    margin-bottom: 20px;
+}
+
+.btn_choose {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    border-width: 1px;
+    transition: background-color 200ms ease-in-out;
+}
+
+.btn_choose:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    cursor: pointer;
+    transition: background-color 200ms ease-in-out;
+}
+
+.btn_choose > a {
+    font-size: 1.25rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.btn_packages_active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 0.2rem 0.8rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    border-radius: 0.15rem;
+    border-width: 1px;
+    transition: background-color 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.btn_packages_inactive {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: white;
+    padding: 0.2rem 0.8rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    border-radius: 0.15rem;
+    border-width: 1px;
+    transition: background-color 200ms ease-in-out;
+}
+
+.btn_packages_inactive:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.personalised_packages_section {
+    display: none;
+}
+
+.packages_picture {
+    display: block;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 3.5rem;
+}
+
+/* tablets */
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 10px;
+    }
+
+    .pricing {
+        margin-top: 7rem;
+    }
+}

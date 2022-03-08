@@ -12,7 +12,7 @@ input {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -31,11 +31,11 @@ input {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    padding: 16px;
+    padding: 0.9rem;
     background: #146CB4;
     font-weight: bold;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1.1rem;
 }
 
 .accordion-label:hover {
@@ -63,7 +63,7 @@ input {
 .accordion-content p {
     margin: 0;
     color: rgba(4, 57, 94, .7);
-    font-size: 18px;
+    font-size: 1.1rem;
 }
 
 input:checked + .accordion-label {

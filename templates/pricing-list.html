@@ -1,187 +1,110 @@
 {% include 'shared/navigation_bar.html' %}
 
 {% block content %}
+    <link rel="stylesheet" href="/static/css/pricing_style.css">
+    <link rel="stylesheet" href="/static/css/accordion.css">
+    <script src="/static/js/button_management.js" defer></script>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/accordion.css">
+    <div class="pricing">
+        <div class="pricing_title">
+            <p class="title_1">План & Ценови Лист</p>
+            <p class="title_2">Имаме план за всеки потребител</p>
+            <p class="title_3">Независимо дали си фирма или потребител.</p>
+        </div>
+        <div class="button_wrapper">
+            <button class="btn_packages_active" id="standard_packages">Стандартни Пакети</button>
+            <button class="btn_packages_inactive" id="personalised_packages">Персонализирани Пакети</button>
+        </div>
+        <div class="standard_packages_section" id="standard_packages_section">
+            <div class="pricing_info_section">
+                <div class="pricing_info_subsection">
+                    <img class="packages_picture" src="/static/images/baby.png" alt="img">
+                    <p class="package">Безплатен</p>
+                    <p class="price">0лв.</p>
+                    <p>/месец</p>
+                    <p class="includes">Включва:</p>
+                    <p class="add_info"><strong>1</strong> обява за срок от 30 дни</p>
+                    <div class="button_wrapper extra_position">
+                        <button class="btn_choose"><a href="{% url 'landing-checkout' 1 %}">Избери</a></button>
+                    </div>
+                </div>
+                <div class="pricing_info_subsection">
+                    <img class="packages_picture" src="/static/images/human.png" alt="img">
+                    <p class="package">Стандартен</p>
+                    <p class="price">5,99лв.</p>
+                    <p>/месец</p>
+                    <p class="includes">Включва:</p>
+                    <p class="add_info">до <strong>5</strong> обяви за целия абонаментен период</p>
+                    <p class="add_info">Подредба на челна позиция с други обява в общата категория.</p>
+                    <div class="button_wrapper">
+                        <button class="btn_choose"><a href="{% url 'landing-checkout' 2 %}">Избери</a></button>
+                    </div>
+                </div>
+                <div class="pricing_info_subsection">
+                    <img class="packages_picture" src="/static/images/robot.png" alt="img">
+                    <p class="package">Премиум</p>
+                    <p class="price">19,99лв.</p>
+                    <p>/месец</p>
+                    <p class="includes">Включва:</p>
+                    <p class="add_info">до <strong>20</strong> обяви за целия абонаментен период</p>
+                    <p class="add_info">Подредба на челна позиция с други обява в общата категория.</p>
+                    <div class="button_wrapper">
+                        <button class="btn_choose"><a href="{% url 'landing-checkout' 3 %}">Избери</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="personalised_packages_section" id="personalised_packages_section">
+            <div class="pricing_info_section">
+                <div class="pricing_info_subsection">
+                    <img class="packages_picture" src="/static/images/businesspng.png" alt="img">
+                    <p class="package padding_added">Персонализиран за вашите нужди</p>
+                    <p class="includes">Включва:</p>
+                    <p class="add_info">По договаряне</p>
+                    <div class="button_wrapper extra_position">
+                        <button class="btn_choose"><a href="{% url 'contacts' %}">Свържи се с нас</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <br/><br>
-
-    <div class="container p-0">
-
-        <h1 class="h3 mb-3 text-center">План &amp; Ценови Лист</h1>
-
-        <div class="row">
-            <div class="col-md-10 col-xl-8 mx-auto">
-                <h1 class="text-center">Имаме план за всеки потребител</h1>
-                <p class="lead text-center mb-4">Независимо дали си фирма или потребител.</p>
-
-                <div class="row justify-content-center mt-3 mb-2">
-                    <div class="col-auto">
-                        <nav class="nav btn-group">
-                            <a href="#monthly" class="btn btn-outline-primary active" data-toggle="tab">Стандартни
-                                Пакети</a>
-                            <a href="#annual" class="btn btn-outline-primary" data-toggle="tab">Персонализирани
-                                Пакети</a>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="tab-content" style="width: 750px; text-align:center;">
-                    <div class="tab-pane fade show active" id="monthly">
-                        <div class="row py-4">
-                            <div class="col-sm-4 mb-3 mb-md-0">
-                                <div class="card text-center h-100">
-                                    <div class="card-body d-flex flex-column">
-                                        <p style="text-align:center;">
-                                            <img src="/static/images/baby.png" alt="" width="50px"/>
-                                        </p>
-                                        <div class="mb-4">
-                                            <h5>Безплатен</h5>
-                                            <span class="display-4">0лв.</span>
-                                            <p></p>
-                                            <span>/месец</span>
-                                        </div>
-                                        <h6>Включва:</h6>
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2">
-                                                <strong>1</strong> обява за срок от 30 дни
-                                            </li>
-                                        </ul>
-                                        <div class="mt-auto">
-                                            <a href="{% url 'landing-checkout' 1 %}"
-                                               class="btn btn-lg btn-outline-primary">Избери</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-3 mb-md-0">
-                                <div class="card text-center h-100">
-                                    <div class="card-body d-flex flex-column">
-                                        <p style="text-align:center;">
-                                            <img src="/static/images/human.png" alt="" width="50px"/>
-                                        </p>
-                                        <div class="mb-4">
-                                            <h5>Стандартен</h5>
-                                            <span class="display-4">5,99лв.</span>
-                                            <p></p>
-                                            <span>/месец</span>
-                                        </div>
-                                        <h6>Включва:</h6>
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2">
-                                                до <strong>5</strong> обяви за целия абонаментен период
-                                            </li>
-                                            <hr>
-                                            <li class="mb-2">
-                                                Подредба на челна позиция с други обява в общата категория.
-                                            </li>
-                                        </ul>
-                                        <div class="mt-auto">
-                                            <a href="{% url 'landing-checkout' 2 %}"
-                                               class="btn btn-lg btn-outline-primary">Избери</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-3 mb-md-0">
-                                <div class="card text-center h-100">
-                                    <div class="card-body d-flex flex-column">
-                                        <p style="text-align:center;">
-                                            <img src="/static/images/robot.png" alt=""
-                                                 width="50px"/>
-                                        </p>
-                                        <div class="mb-4">
-                                            <h5>Премиум</h5>
-                                            <span class="display-4">19,99лв.</span>
-                                            <p></p>
-                                            <span>/месец</span>
-                                        </div>
-                                        <h6>Включва:</h6>
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2">
-                                                до <strong>20</strong> обяви за целия абонаментен период
-                                            </li>
-                                            <hr>
-                                            <li class="mb-2">
-                                                Подредба на челна позиция с други обява в общата категория.
-                                            </li>
-                                        </ul>
-                                        <div class="mt-auto">
-                                            <a href="{% url 'landing-checkout' 3 %}"
-                                               class="btn btn-lg btn-outline-primary">Избери</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="annual">
-                        <div class="row py-4">
-                            <div class="col-sm-4 mb-3 mb-md-0">
-                                <div class="card text-center h-100">
-                                    <div class="card-body d-flex flex-column">
-                                        <p style="text-align:center;">
-                                            <img src="/static/images/businesspng.png" alt=""
-                                                 width="80px"/>
-                                        </p>
-                                        <div class="mb-4">
-                                            <h5>Персонализиран за вашите нужди</h5>
-                                        </div>
-                                        <h6>Включва:</h6>
-                                        <ul class="list-unstyled">
-                                            <li class="mb-2">
-                                                По договаряне
-                                            </li>
-                                        </ul>
-                                        <div class="mt-auto">
-                                            <a href="{% url 'contacts' %}" class="btn btn-lg btn-primary">Свържи се с
-                                                нас</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <br/><br>
-                <h2>Често Задавани Въпроси?</h2>
-                <br/><br>
-                <div class="accordion-wrapper">
-                    <div class="accordion">
-                        <input type="radio" name="radio-a" id="check1" checked>
-                        <label class="accordion-label" for="check1">Как мога да платя за месечен абонамент?</label>
-                        <div class="accordion-content">
-                            <p>Плащането се извършва само чрез кредитна/дебитна карта.</p>
-                        </div>
-                    </div>
-                    <div class="accordion">
-                        <input type="radio" name="radio-a" id="check2">
-                        <label class="accordion-label" for="check2">Предлагате ли безплатен тестов период?</label>
-                        <div class="accordion-content">
-                            <p>Всички регистрирани потребители автоматично получават нашията безплатен
-                                пакет, който ви дава възможносто да споделите 1 обява за срок от 30 дни.</p>
-                        </div>
-                    </div>
-                    <div class="accordion">
-                        <input type="radio" name="radio-a" id="check3">
-                        <label class="accordion-label" for="check3">Мога ли да прекратя плана си предварително?</label>
-                        <div class="accordion-content">
-                            <p>Можете да прекратите абонамента си по всяко едно време.</p>
-                        </div>
-                    </div>
-                    <div class="accordion">
-                        <input type="radio" name="radio-a" id="check4">
-                        <label class="accordion-label" for="check4">Друг Въпрос?</label>
-                        <div class="accordion-content">
-                            <p>При други въпроси, моля свържете се с нас!</p>
-                        </div>
-                    </div>
-                </div>
-                <br/><br>
+    <h2>Често Задавани Въпроси?</h2>
+    <br/><br>
+    <div class="accordion-wrapper">
+        <div class="accordion">
+            <input type="radio" name="radio-a" id="check1" checked>
+            <label class="accordion-label" for="check1">Как мога да платя за месечен абонамент?</label>
+            <div class="accordion-content">
+                <p>Плащането се извършва само чрез кредитна/дебитна карта.</p>
             </div>
+        </div>
+        <div class="accordion">
+            <input type="radio" name="radio-a" id="check2">
+            <label class="accordion-label" for="check2">Предлагате ли безплатен тестов период?</label>
+            <div class="accordion-content">
+                <p>Всички регистрирани потребители автоматично получават нашията безплатен
+                    пакет, който ви дава възможносто да споделите 1 обява за срок от 30 дни.</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <input type="radio" name="radio-a" id="check3">
+            <label class="accordion-label" for="check3">Мога ли да прекратя плана си предварително?</label>
+            <div class="accordion-content">
+                <p>Можете да прекратите абонамента си по всяко едно време.</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <input type="radio" name="radio-a" id="check4">
+            <label class="accordion-label" for="check4">Друг Въпрос?</label>
+            <div class="accordion-content">
+                <p>При други въпроси, моля свържете се с нас!</p>
+            </div>
+        </div>
+    </div>
+    <br/><br>
 
-            <hr width="1100">
 
-            {% include 'shared/footer.html' %}
+    {% include 'shared/footer.html' %}
 {% endblock %}

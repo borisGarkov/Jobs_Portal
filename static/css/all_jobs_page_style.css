@@ -1,8 +1,57 @@
+#myBtnContainer {
+    margin: 7rem auto 2rem;
+    text-align: center;
+    max-width: 1200px;
+}
+
+#myBtnContainer > button {
+    margin-bottom: 10px;
+}
+
 .filterDiv {
     display: none;
 }
 
-
 .show {
     display: block;
+}
+
+.btn_submit {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: white;
+    padding: 0.2rem 0.8rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    transition: background-color 200ms ease-in-out;
+    margin: 0 0;
+}
+
+.btn_submit:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.page-item {
+    max-width: 410px;
+    margin-bottom: 20px;
+    border: 1px solid #eaecef;
+    padding: 10px 10px;
+    border-radius: 10px;
+    color: #818997;
+    font-weight: 500;
 }

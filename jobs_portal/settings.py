@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-jl3i1knc^@hy+ng)(csnwnw8r!wz!tba)zxmmeeri-og^zay^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG_MODE', False)
+DEBUG = True  # os.environ.get('DEBUG_MODE', False)
 
 ALLOWED_HOSTS = ['*', ]
 
@@ -158,6 +158,14 @@ cloudinary.config(
     api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
     secure=True
 )
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,  # You can change this based on your requirements.
+        'width': 'auto',
+
+    },
+}
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND

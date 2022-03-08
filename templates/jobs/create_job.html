@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <link rel="stylesheet" type="text/css" href="/static/css/create-job.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/login_page.css"/>
 
     <section class="form rounded">
         <h2>Създай Обява</h2>
@@ -12,10 +12,10 @@
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Създай Обява</button>
+            <button type="submit" class="btn_submit">Създай Обява</button>
         </form>
 
-        <img class="img-2" src="/static/images/logo.png" alt="">
+        <img class="img-2" src="/static/images/logo.png" alt="img">
 
     </section>
 

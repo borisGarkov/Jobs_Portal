@@ -3,93 +3,82 @@
 {% block content %}
     {% include 'messages/general_message_template.html' %}
 
-    <main>
-        <section class="main-header">
+    <section class="main_upper_section">
+        <div class="main_upper_section_text">
+            <h1>По-лесният начин за работа</h1>
 
-            <article class="main-header-left">
-                {#                <h1 class="display-4">Работа в удобно за вас време</h1>#}
-                <h1 class="display-4">По-лесният начин за работа</h1>
-                <br>
-                <p class="lead">С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни
-                    интервюта.</p>
-            </article>
+            <p>С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни
+                интервюта.</p>
+        </div>
 
-            <article class="main-header-right">
-                <img src="/static/images/home-picture.png" alt="work to be done">
-            </article>
-        </section>
+        <img src="/static/images/home-picture.png" alt="main_upper_section_img">
+    </section>
 
-        <br/><br>
+    {% if looking_for_people_jobs %}
+        {% with looking_for_people_jobs as jobs %}
+            <p class="main_page_subtitles">Най-нови обяви за работа</p>
+            {% include 'shared/jobs_context_box.html' %}
+        {% endwith %}
+    {% endif %}
 
-        {% if looking_for_people_jobs %}
-            {% with looking_for_people_jobs as jobs %}
-                <h2 class="h2" style="margin-bottom: 50px;">Най-нови обяви за работа</h2>
-                {% include 'shared/jobs_context_box.html' %}
-            {% endwith %}
-        {% endif %}
+    <br/><br>
+    <hr style="max-width: 1200px">
 
-        <br/><br>
-        <hr style="max-width: 1200px">
+    {% if offer_jobs %}
+        {% with offer_jobs as jobs %}
+            <p class="main_page_subtitles">Най-нови обяви в Предлагам Услуга</p>
+            {% include 'shared/jobs_context_box.html' %}
+        {% endwith %}
+    {% endif %}
 
-        {% if offer_jobs %}
-            {% with offer_jobs as jobs %}
-                <h2 class="h2" style="margin-bottom: 50px; text-align:center;">Най-нови обяви в Предлагам Услуга</h2>
-                {% include 'shared/jobs_context_box.html' %}
-            {% endwith %}
-        {% endif %}
+    <div class="why_rent_a_hand_outer_box">
+        <div class="why_rent_a_hand">
+            <div class="why_rent_a_hand_img">
+                <img src="/static/images/home-picture-2.png" alt="work_to_be_done">
+            </div>
 
-        <br/><br>
+            <div class="why_rent_a_hand_text">
+                <h2>Защо Rent A Hand?</h2>
+                <p>Работа в удобно за Вас време.</p>
+                <h4>Идеална възможност за:</h4>
 
-        <section class="sub-header">
-            <section class="white-box">
-                <article class="sub-header-left">
-                    <img src="/static/images/home-picture-2.png" alt="work to be done">
-                </article>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Всички търсещи работа без дългосрочни договори</p>
+                </div>
 
-                <article class="sub-header-right">
-                    <h2>Защо Rent A Hand?</h2>
-                    <p>Работа в удобно за Вас време.</p>
-                    <h6>Идеална възможност за:</h6>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Студенти, хора на свободна практика и всички, които искат да изкарат допълнителни
+                        доходи</p>
+                </div>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Тези, които искат да споделят своите умения и да намерят клиенти</p>
+                </div>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Хора, които имат нужда от човек, да помогне за всичко свързано
+                        с дома или работното място</p>
+                </div>
 
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Всички търсещи работа без дългосрочни договори</p>
-                    </div>
+                <h4>Ние осигуряваме:</h4>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Лесен начин вашите умения да достигнат до потенциални клиенти</p>
+                </div>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Платформа, в която можете да намерите подходящия човек за вашите изисквания</p>
+                </div>
+                <div class="sub_points">
+                    <img src="/static/images/check.png" alt="check">
+                    <p>Екип, който да се погрижи целия работен процес да е изряден</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Студенти, хора на свободна практика и всички, които искат да изкарат допълнителни
-                            доходи</p>
-                    </div>
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Тези, които искат да споделят своите умения и да намерят клиенти</p>
-                    </div>
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Хора, които имат нужда от човек, да помогне за всичко свързано
-                            с дома или работното място</p>
-                    </div>
-                    <h6>Ние осигуряваме:</h6>
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Лесен начин вашите умения да достигнат до потенциални клиенти</p>
-                    </div>
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Платформа, в която можете да намерите подходящия човек за вашите изисквания</p>
-                    </div>
-                    <div class="sub-points">
-                        <img src="/static/images/check.png" width="20" height="" alt="">
-                        <p>Екип, който да се погрижи целия работен процес да е изряден</p>
-                    </div>
-                </article>
-            </section>
-        </section>
-
-        <br/><br>
-
-    </main>
 
     {% include 'shared/footer.html' %}
 {% endblock %}

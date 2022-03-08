@@ -5,13 +5,13 @@
 
     {% include 'messages/general_message_template.html' %}
 
-    <section class="form rounded">
+    <section class="form">
         <img src="/static/images/labor-day.png" alt="">
 
         <form method="post" action="#">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Вход</button>
+            <button type="submit" class="btn_submit">Вход</button>
         </form>
         <br>
         <small><a href="{% url 'password_reset' %}">Забравена Парола?</a></small>
