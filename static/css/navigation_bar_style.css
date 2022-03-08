@@ -52,6 +52,11 @@ html {
     color: #43424a;
 }
 
+.entry {
+    color: #176ab4 !important;
+    font-weight: 500 !important;
+}
+
 .dropdown {
     position: relative;
 }

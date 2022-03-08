@@ -39,7 +39,7 @@
             </div>
         </div>
     {% else %}
-        <a href="{% url 'login' %}">Вход</a>
+        <a href="{% url 'login' %}" class="entry">Вход</a>
     {% endif %}
 
     {% if user.is_authenticated %}
