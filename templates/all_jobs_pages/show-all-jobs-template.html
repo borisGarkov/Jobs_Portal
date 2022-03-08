@@ -4,10 +4,10 @@
     <link rel="stylesheet" type="text/css" href="/static/css/all_jobs_page_style.css">
 
     <div id="myBtnContainer">
-        <button class="btn_submit active" onclick="filterSelection('all')">Покажи Всички</button>
+        <button class="btn_submit_section active" onclick="filterSelection('all')">Покажи Всички</button>
 
         {% for cat in categories %}
-            <button class="btn_submit" onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
+            <button class="btn_submit_section" onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
         {% endfor %}
     </div>
 

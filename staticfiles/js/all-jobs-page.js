@@ -8,7 +8,8 @@ function filterSelection(c) {
     var x, i;
     x = document.getElementsByClassName("filterDiv");
     if (c == "all") c = "";
-    // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+    // Add the "show" class (display:block) to the filtered elements,
+    // and remove the "show" class from the elements that are not selected
     for (i = 0; i < x.length; i++) {
         w3RemoveClass(x[i], "show");
         if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
@@ -42,7 +43,7 @@ function w3RemoveClass(element, name) {
 
 // Add active class to the current control button (highlight it)
 let btnContainer = document.getElementById("myBtnContainer");
-let btns = Array.from(document.getElementsByClassName("btn btn-light"));
+let btns = Array.from(document.getElementsByClassName("btn_submit_section"));
 btnContainer.addEventListener('click', onBtnClick);
 
 function onBtnClick(e) {

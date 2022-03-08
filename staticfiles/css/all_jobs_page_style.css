@@ -13,10 +13,10 @@
 }
 
 .show {
-    display: block;
+    display: flex;
 }
 
-.btn_submit {
+.btn_submit_section {
     color: #007bff;
     border-color: #007bff;
     background-color: white;
@@ -29,7 +29,7 @@
     margin: 0 0;
 }
 
-.btn_submit:hover {
+.btn_submit_section:hover {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
