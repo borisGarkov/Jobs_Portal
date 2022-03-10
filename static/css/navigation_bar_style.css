@@ -20,7 +20,7 @@ html {
 }
 
 .nav_bar_img {
-    max-width: 6.3%;
+    max-width: 3rem;
 }
 
 .dropdown > button, .dropdown_menu > a, .dropdown_menu > button {
