@@ -24,20 +24,25 @@
 <body>
 
 <div class="navigation">
+{#    <a href="{% url 'home' %}"></a>#}
     <img src="/static/images/logo.png" class="nav_bar_img" alt="logo">
 
     <a href="{% url 'home' %}">Начало</a>
     <a href="{% url 'search jobs' %}">Обяви</a>
     <a href="{% url 'business-clients' %}">Бизнес Клиенти</a>
-    <a href="{% url 'pricing-list' %}">Ценови Лист</a>
+    <a href="{% url 'pricing-list' %}">План</a>
+
     {% if user.is_authenticated %}
-        <div class="dropdown">
-            <button>Профил</button>
-            <div class="dropdown_menu">
-                <button><a href="{% url 'profile' user.id %}">Профил</a></button>
-                <button><a href="{% url 'logout' %}">Изход</a></button>
-            </div>
-        </div>
+        {#        <div class="dropdown">#}
+        {#            <button>Профил</button>#}
+        {#            <div class="dropdown_menu">#}
+        {#                <button><a href="{% url 'profile' user.id %}">Профил</a></button>#}
+        {#                <button><a href="{% url 'logout' %}">Изход</a></button>#}
+        {#            </div>#}
+        {#        </div>#}
+
+        <a href="{% url 'profile' user.id %}">Профил</a>
+        <a href="{% url 'logout' %}">Изход</a>
     {% else %}
         <a href="{% url 'login' %}" class="entry">Вход</a>
     {% endif %}
@@ -48,7 +53,6 @@
         </button>
     {% endif %}
 </div>
-
 
 {% block content %}
     {# actual content here #}
