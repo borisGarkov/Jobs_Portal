@@ -9,11 +9,11 @@
 }
 
 .filterDiv {
-    display: none;
+    /*display: none;*/
 }
 
 .show {
-    display: flex;
+    /*display: flex;*/
 }
 
 .btn_submit_section {

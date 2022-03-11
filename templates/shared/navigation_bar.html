@@ -45,7 +45,9 @@
         <a href="{% url 'profile' user.id %}">Профил</a>
         <a href="{% url 'logout' %}">Изход</a>
     {% else %}
-        <a href="{% url 'login' %}" class="entry">Вход</a>
+        <button class="create_job entry" type="submit">
+            <a href="{% url 'login' %}">Вход</a>
+        </button>
     {% endif %}
 
     {% if user.is_authenticated %}

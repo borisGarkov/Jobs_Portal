@@ -53,8 +53,7 @@ html {
 }
 
 .entry {
-    color: #176ab4 !important;
-    font-weight: 500 !important;
+    width: 4rem;
 }
 
 .dropdown {
