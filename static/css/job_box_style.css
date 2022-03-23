@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin: 5rem 0 0 0;
 }
 
 .job_box {

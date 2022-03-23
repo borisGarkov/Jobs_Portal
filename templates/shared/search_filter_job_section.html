@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="/static/css/filter_jobs_style.css">
+
+<section class="search_filter_section">
+    <h2>Потърси обяви</h2>
+
+    <form action="{% url 'all jobs' %}">
+        <div class="fieldWrapper">
+            <label for="{{ form.work_category.id_for_label }}">Категория:</label>
+            {{ form.work_category }}
+        </div>
+        <div class="fieldWrapper">
+            <label for="{{ form.work_type.id_for_label }}">Тип обява:</label>
+            {{ form.work_type }}
+        </div>
+        <button type="submit" class="btn_submit">Търси</button>
+    </form>
+</section>

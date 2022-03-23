@@ -55,3 +55,9 @@
     color: #818997;
     font-weight: 500;
 }
+
+@media screen and (max-width: 768px) {
+    .page-item {
+        padding: 3px 7px;
+    }
+}

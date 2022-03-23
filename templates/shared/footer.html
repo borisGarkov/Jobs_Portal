@@ -8,7 +8,7 @@
     <div class="footer_pages">
         <p class="footer_mini_header">СТРАНИЦИ</p>
         <p class="footer_mini_text is_link"><a href="{% url 'home' %}">Начало</a></p>
-        <p class="footer_mini_text is_link"><a href="{% url 'search jobs' %}">Потърси Работа</a></p>
+        <p class="footer_mini_text is_link"><a href="{% url 'all jobs' %}">Потърси Работа</a></p>
         <p class="footer_mini_text is_link"><a href="{% url 'contacts' %}">Контакти</a></p>
         {% if user.is_authenticated %}
             <p class="footer_mini_text is_link"><a href="{% url 'profile' user.id %}">Профил</a></p>

@@ -1,9 +1,6 @@
-import os
-
-from cloudinary.forms import CloudinaryJsFileField
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
+from .models import WORK_CATEGORIES, WORK_TYPE
 
 from utils.forms import BootstrapFormMixin
 from jobs_portal.jobs.models import JobModel
@@ -86,4 +83,20 @@ class JobConnectWithJobPoster(JobBaseForm):
         widget=forms.Textarea(attrs={'placeholder': 'Съобщение'}),
         label='Съобщение',
         required=False,
+    )
+
+
+class JobFilterForm(forms.Form):
+    show_all_list = [('Покажи всички', 'Покажи всички')]
+
+    WORK_CATEGORIES = show_all_list + WORK_CATEGORIES
+    WORK_TYPE = show_all_list + WORK_TYPE
+
+    work_category = forms.CharField(
+        label='Категория',
+        widget=forms.Select(choices=WORK_CATEGORIES)
+    )
+    work_type = forms.CharField(
+        label='Тип обява',
+        widget=forms.Select(choices=WORK_TYPE)
     )

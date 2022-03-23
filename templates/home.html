@@ -4,32 +4,25 @@
     {% include 'messages/general_message_template.html' %}
 
     <section class="main_upper_section">
+        <img src="/static/images/logo.png" alt="logo"/>
         <div class="main_upper_section_text">
-            <h1>По-лесният начин за работа</h1>
+            <h1>Платформа за работа.</h1>
+            <h2>Сподели обява с няколко клика.</h2>
 
-            <p>С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни
-                интервюта.</p>
+
+            {#            <p>С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни#}
+            {#                интервюта.</p>#}
+            <div class="subsection_button">
+                <button type="submit" class="btn_submit center_button">
+                    <a href="{% url 'create job' %}">Създай обява</a>
+                </button>
+            </div>
         </div>
 
-        <img src="/static/images/home-picture.png" alt="main_upper_section_img">
+        {% include 'shared/search_filter_job_section.html'%}
     </section>
 
-    {% if looking_for_people_jobs %}
-        {% with looking_for_people_jobs as jobs %}
-            <p class="main_page_subtitles">Най-нови обяви за работа</p>
-            {% include 'shared/jobs_context_box.html' %}
-        {% endwith %}
-    {% endif %}
-
-    <br/><br>
-    <hr style="max-width: 1200px">
-
-    {% if offer_jobs %}
-        {% with offer_jobs as jobs %}
-            <p class="main_page_subtitles">Най-нови обяви в Предлагам Услуга</p>
-            {% include 'shared/jobs_context_box.html' %}
-        {% endwith %}
-    {% endif %}
+    {% include 'shared/choose_category_section.html' %}
 
     <div class="why_rent_a_hand_outer_box">
         <div class="why_rent_a_hand">

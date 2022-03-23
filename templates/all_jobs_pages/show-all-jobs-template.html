@@ -9,13 +9,7 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="/static/css/all_jobs_page_style.css">
 
-    <div id="myBtnContainer">
-        <button class="btn_submit_section active" onclick="filterSelection('all')">Покажи Всички</button>
-
-        {% for cat in categories %}
-            <button class="btn_submit_section" onclick="filterSelection('{{ cat }}')">{{ cat }}</button>
-        {% endfor %}
-    </div>
+    {% include 'shared/search_filter_job_section.html' %}
 
     {% include 'shared/jobs_context_box.html' %}
 
@@ -23,10 +17,14 @@
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page=1">&laquo; Първа</a>
+                    <a class="page-link"
+                       href="?work_category={{ request.GET.work_category }}&work_type={{ request.GET.work_type }}&page=1">&laquo;
+                        Първа</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предишна</a>
+                    <a class="page-link"
+                       href="?work_category={{ request.GET.work_category }}&work_type={{ request.GET.work_type }}&
+                       page={{ page_obj.previous_page_number }}">Предишна</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
@@ -39,15 +37,21 @@
 
             {% for page in page_obj.paginator.page_range %}
                 <li class="page-item"><a class="page-link"
-                                         href="?page={{ page }}">{{ page }}</a></li>
+                                         href="?work_category={{ request.GET.work_category }}&work_type={{ request.GET.work_type }}&page={{ page }}">{{ page }}</a>
+                </li>
             {% endfor %}
 
             {% if page_obj.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следваща</a>
+                    <a class="page-link"
+                       href="?work_category={{ request.GET.work_category }}&work_type={{ request.GET.work_type }}&
+                       page={{ page_obj.next_page_number }}">Следваща</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последна &raquo;</a>
+                    <a class="page-link"
+                       href="?work_category={{ request.GET.work_category }}&work_type={{ request.GET.work_type }}&
+                       page={{ page_obj.paginator.num_pages }}">Последна
+                        &raquo;</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
@@ -63,8 +67,5 @@
     <br/><br>
 
     {% include 'shared/footer.html' %}
-
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="/static/js/all-jobs-page.js"></script>
 
 {% endblock %}

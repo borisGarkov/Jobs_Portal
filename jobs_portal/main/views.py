@@ -7,10 +7,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse
-from django.views.generic import ListView, FormView, TemplateView
+from django.views.generic import ListView, FormView
+
+from jobs_portal.jobs.models import WORK_CATEGORIES, WORK_TYPE
 
 from jobs_portal.jobs.models import JobModel
 from jobs_portal.main.forms import ContactForm
+from jobs_portal.jobs.forms import JobFilterForm
 
 UserModel = get_user_model()
 
@@ -19,53 +22,48 @@ class HomeView(ListView):
     model = JobModel
     template_name = 'home.html'
 
-    # context_object_name = 'jobs'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['looking_for_people_jobs'] = [job for job in JobModel.objects.order_by('-id') if
-                                              job.work_type == 'Търся Хора'][:4]
-        context['offer_jobs'] = [job for job in JobModel.objects.order_by('-id') if
-                                 job.work_type == 'Предлагам Услуга'][:4]
+        context['form'] = JobFilterForm()
         return context
-
-
-class AllJobsView(TemplateView):
-    template_name = 'all_jobs_pages/all-jobs-page.html'
 
 
 class JobsPageBaseView(ListView):
     model = JobModel
-    template_name = ''
+    template_name = 'all_jobs_pages/show-all-jobs-template.html'
     context_object_name = 'jobs'
-    paginate_by = 12
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = [cat[0] for cat in JobModel.WORK_CATEGORIES]
+
+        if len(self.request.GET) > 0:
+            form = JobFilterForm(data={
+                'work_category': self.request.GET['work_category'],
+                'work_type': self.request.GET['work_type'],
+            })
+        else:
+            form = JobFilterForm()
+
+        context['form'] = form
         context['jobs'] = sorted(context['jobs'], key=lambda job: -job.user.usersubscriptionplan.subscription_plan_id)
         return context
 
-
-class LookingForJobsView(JobsPageBaseView):
-    model = JobModel
-    template_name = 'all_jobs_pages/show-all-jobs-template.html'
-
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)
-        qs = JobModel.objects.filter(work_type='Търся Хора')
-        return qs
 
+        if len(self.request.GET) > 0:
+            work_categories = [tuple_[0] for tuple_ in WORK_CATEGORIES]
+            work_types = [tuple_[0] for tuple_ in WORK_TYPE]
 
-class OfferJobsView(JobsPageBaseView):
-    template_name = 'all_jobs_pages/show-all-jobs-template.html'
+            selected_work_category = self.request.GET['work_category']
+            selected_work_type = self.request.GET['work_type']
 
-    def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
-        try:
-            qs = JobModel.objects.filter(work_type='Предлагам Услуга', work_category=self.request.GET['category'])
-        except Exception:
-            qs = JobModel.objects.filter(work_type='Предлагам Услуга', )
+            qs = JobModel.objects.filter(
+                work_type__in=work_types if selected_work_type in ['Покажи всички', ''] else [selected_work_type],
+                work_category__in=work_categories if selected_work_category in ['Покажи всички',
+                                                                                ''] else [selected_work_category],
+            )
 
         return qs
 
