@@ -24,6 +24,7 @@
 
 .content-box > img {
     max-width: 15rem;
+    max-height: 243px;
 }
 
 .content-box {
