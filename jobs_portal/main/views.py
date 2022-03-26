@@ -32,7 +32,7 @@ class JobsPageBaseView(ListView):
     model = JobModel
     template_name = 'all_jobs_pages/show-all-jobs-template.html'
     context_object_name = 'jobs'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
