@@ -1,0 +1,22 @@
+h4 {
+    text-align: center;
+    margin: 5rem;
+}
+
+.form-input-search {
+    margin: 7rem 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-input-search input {
+    margin: 0 0 0 0;
+    max-width: 40%;
+}
+
+@media screen and (max-width: 700px) {
+    .form-input-search input {
+        max-width: 70%;
+    }
+}
