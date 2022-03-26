@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/7f0cbe3ece.js" crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
 
     <link rel="icon" type="image/png" href="/static/images/main_icon.jpg">
     <title>{% block head_title %}Портал за Работа{% endblock %}</title>
@@ -24,13 +25,13 @@
 <body>
 
 <div class="navigation">
-{#    <a href="{% url 'home' %}">#}
-{#        <img src="/static/images/logo.png" class="nav_bar_img" alt="logo">#}
-{#    </a>#}
+    <a href="{% url 'home' %}">
+        <img src="/static/images/logo.png" class="nav_bar_img" alt="logo">
+    </a>
 
     <a href="{% url 'home' %}">Начало</a>
     <a href="{% url 'all jobs' %}">Обяви</a>
-    <a href="{% url 'business-clients' %}">Бизнес Клиенти</a>
+    {#    <a href="{% url 'business-clients' %}">Бизнес Клиенти</a>#}
     <a href="{% url 'pricing-list' %}">План</a>
 
     {% if user.is_authenticated %}

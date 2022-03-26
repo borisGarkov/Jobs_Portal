@@ -1,15 +1,44 @@
-<div class="job_box_section">
-    {% for job in jobs %}
-        <div class="job_box filterDiv {{ job.work_category }}">
-            <div class="job_box_img">
+{% for job in jobs %}
+    <div class="container">
+        <div class="card">
+            <div class="card-image">
                 <img src="{{ job.image.url }}" alt="job_img">
             </div>
-            <div class="job_box_title">
-                <p>{{ job.title }}</p>
-                <a class="job_box_like" href="{% url 'details job' job.id %}"><i class="fa fa-heart"></i></a>
+            <div class="card-content">
+                <div class="blog-details">
+                    <div class="icon-text">
+                        <span class="iconify" data-icon="ri:calendar-todo-line"></span>
+                        <span class="text">{{ job.date_posted }}</span>
+                    </div>
+
+                    <div class="icon-text">
+                        <span class="iconify" data-icon="ant-design:user-add-outlined"></span>
+                        <span class="text">{{ job.user.username }}</span>
+                    </div>
+
+                    <div class="icon-text">
+                        <span class="iconify" data-icon="ant-design:like-outlined"></span>
+                        <span class="text">{{ job.total_likes }}</span>
+                    </div>
+
+                    <div class="icon-text">
+                        <span class="iconify" data-icon="akar-icons:comment"></span>
+                        <span class="text">{{ job.comments_set.count }}</span>
+                    </div>
+                </div>
+
+                <h2 class="blog-title">{{ job.title }}</h2>
+
+                <div class="job-description">
+                    <p>{{ job.description|safe }}</p>
+                </div>
+
+                <div class="blog-cta">
+                    <a href="{% url 'details job' job.id %}" class="button">Виж повече</a>
+                    <button class="share-button"><span class="iconify"
+                                                       data-icon="fluent:share-android-24-regular"></span></button>
+                </div>
             </div>
-            <p class="job_box_city">{{ job.city }}</p>
-            <a href="{% url 'details job' job.id %}" class="job_box_button"> Виж Повече</a>
         </div>
-    {% endfor %}
-</div>
+    </div>
+{% endfor %}

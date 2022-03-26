@@ -1,119 +1,116 @@
 * {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --off-white: #f5f5f5;
+    --primary: #dd7373;
 }
 
-.job_box_section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 5rem 0 0 0;
+html {
+    font-size: 10px;
 }
 
-.job_box {
-    /*width: 240px;*/
-    width: 20%;
-    height: 260px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    flex-shrink: 0;
+.container {
+    width: 80%;
+    margin: 2rem auto;
 }
 
-.job_box_img {
-    height: 55%;
+.card {
+    /*display: flex;*/
+    background-color: #fff;
+    box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.28);
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
 
-.job_box_img > img {
-    margin: 0;
+.card-image {
+    height: 20rem;
+    overflow: hidden;
+}
+
+.card-image img {
     width: 100%;
-    min-height: 9rem;
-    max-height: 9rem;
+    height: 100%;
     object-fit: cover;
     object-position: top;
-    border-radius: 8px 8px 0px 0;
+    display: block;
 }
 
-.job_box_title > p {
-    font-size: 1.2rem;
-    font-weight: 600;
+.card-content {
+    padding: 2rem;
+}
+
+.blog-details, .icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.icon-text {
+    margin-right: 1rem;
+}
+
+.icon-text .iconify {
+    color: var(--primary);
+    margin-right: 0.3rem;
+}
+
+.blog-cta {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    padding: 1rem 1rem;
+    display: inline-block;
+    background-color: var(--primary);
+    color: var(--off-white);
+    border-radius: 0.6rem;
+}
+
+.share-button {
+    width: 3rem;
+    height: 3rem;
+    border: 0.1rem solid var(--primary);
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--primary);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.share-button:focus {
+    background-color: var(--primary);
+    color: var(--off-white);
+}
+
+.job-description {
+    max-height: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 0.1rem 0;
 }
 
-.job_box_city {
-    margin: 0.3rem 0;
-    font-weight: 300;
-    font-size: 1rem;
-}
-
-.job_box_button {
-    font-size: 1rem;
-    text-decoration: none;
-    text-align: center;
-    background-color: #146CB4;
-    color: #fff;
-    border-radius: 0 0 8px 8px;
-    height: 100%;
-    padding: 8px;
-}
-
-.job_box_button:hover {
-    text-decoration: none;
-    background-color: #1D3461;
-    color: #fff;
-}
-
-.job_box_like {
-    position: relative;
-    left: 240px;
-    bottom: 50px;
-    color: #E26D5C;
-    background: #fff;
-    border-radius: 100%;
-    padding: 15px;
-    font-size: 17px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
-    transition: color 1s, transform 1s;
-}
-
-.job_box_like:hover {
-    color: #fff;
-    background: #E26D5C;
-    transform: color 1s;
-}
-
-/* phones */
-@media screen and (max-width: 768px) {
-    .job_box_section {
-        align-items: unset;
-        justify-content: unset;
-        overflow-y: scroll;
+@media screen and (min-width: 900px) {
+    .container {
+        width: 70%;
     }
 
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .job_box_section::-webkit-scrollbar {
-        display: none;
+    .card {
+        display: flex;
+        height: 20rem;
+        overflow: hidden;
     }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .job_box_section {
-        -ms-overflow-style: none;
-        /* IE and Edge */
-        scrollbar-width: none;
-        /* Firefox */
+    .card-image {
+        flex: 1;
+        height: auto;
     }
 
-    .job_box {
-        width: 120px;
-        height: 130px;
+    .card-content {
+        flex: 2;
     }
 
-    .job_box_like {
-        display: none;
+    .job-description {
+        max-height: 40%;
     }
 }
