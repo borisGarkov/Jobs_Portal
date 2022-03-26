@@ -15,9 +15,9 @@
     <link rel="icon" type="image/png" href="/static/images/main_icon.jpg">
     <title>{% block head_title %}Портал за Работа{% endblock %}</title>
 
-    <link rel="stylesheet" href="/static/css/navigation_bar_style.css">
     <link rel="stylesheet" href="/static/css/home_page.css">
     <link rel="stylesheet" href="/static/css/job_box_style.css">
+    <link rel="stylesheet" href="/static/css/navigation_bar_style.css">
     <link rel="stylesheet" href="/static/css/why_rent_a_hand_section_style.css">
     <link rel="stylesheet" href="/static/css/footer_style.css">
 
@@ -51,11 +51,18 @@
         </button>
     {% endif %}
 
+    <button class="share-button search-button" type="submit">
+        <a href="{% url 'search all pages' %}"><span class="iconify" data-icon="bi:search">
+            Създай обява
+        </span></a>
+    </button>
+
     {% if user.is_authenticated %}
         <button class="create_job" type="submit">
             <a href="{% url 'create job' %}">Създай обява</a>
         </button>
     {% endif %}
+
 </div>
 
 {% block content %}

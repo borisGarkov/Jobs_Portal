@@ -94,7 +94,9 @@ class JobFilterForm(forms.Form):
 
     work_category = forms.CharField(
         label='Категория',
-        widget=forms.Select(choices=WORK_CATEGORIES)
+        widget=forms.Select(
+            choices=WORK_CATEGORIES,
+        ),
     )
     work_type = forms.CharField(
         label='Тип обява',

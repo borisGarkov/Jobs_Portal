@@ -144,7 +144,7 @@ def search(request):
 
     context = {
         'searched_text': searched_text,
-        'result': result
+        'jobs': result
     }
 
     return render(request, 'search-page.html', context)
