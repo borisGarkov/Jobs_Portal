@@ -3,6 +3,13 @@
 <section class="search_filter_section">
     <h2>Потърси обяви</h2>
 
+    <form class="form-input-search" method="post" action="{% url 'search all pages' %}">
+        {% csrf_token %}
+        <input class="" type="search" placeholder="Търси в обяви" aria-label="Search" name="searched">
+        {#        <button class="share-button search-button" type="submit"><span class="iconify" data-icon="bi:search"></span>#}
+        {#        </button>#}
+    </form>
+
     <form action="{% url 'all jobs' %}">
         <div class="fieldWrapper">
             <label for="{{ form.work_category.id_for_label }}">Категория:</label>
