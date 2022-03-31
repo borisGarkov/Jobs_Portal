@@ -7,69 +7,71 @@
     {% include 'messages/general_message_template.html' %}
     <br/><br>
 
-    <div class="profile_img">
-        <p class="my_profile_header">Моят Профил</p>
-        <img src="{{ page_user.profile_photo.url }}" alt="avatar">
-        <p class="name_header">{{ page_user.first_name }} {{ page_user.last_name }}</p>
-        <p class="profession">{{ page_user.profession }}</p>
-        <p class="registration_date">
-            Дата на регистрация: {{ profile.date_joined }}
-        </p>
+    <div class="profile_page">
+        <div class="profile_img">
+            {#        <p class="my_profile_header">Моят Профил</p>#}
+            <img src="{{ page_user.profile_photo.url }}" alt="avatar">
+            <p class="name_header">{{ page_user.first_name }} {{ page_user.last_name }}</p>
+            <p class="profession">{{ page_user.profession }}</p>
+            <p class="registration_date">
+                Дата на регистрация: {{ profile.date_joined }}
+            </p>
 
-        <div class="social_media_links">
-            {% if page_user.website_url %}
-                <p><i class="fas fa-home mr-3"></i><a href="{{ page_user.website_url }}">Website Link</a></p>
-            {% else %}
-                <p><i class="fas fa-home mr-3"></i><a href="">Website Link</a></p>
-            {% endif %}
-            {% if page_user.facebook_url %}
-                <p><i class="fab fa-facebook mr-3"></i><a href="{{ page_user.facebook_url }}">Facebook</a></p>
-            {% else %}
-                <p><i class="fab fa-facebook mr-3"></i><a href="">Facebook</a></p>
-            {% endif %}
-            {% if page_user.instagram_url %}
-                <p><i class="fab fa-instagram mr-3"></i><a href="{{ page_user.instagram_url }}">Instagram</a></p>
-            {% else %}
-                <p><i class="fab fa-instagram mr-3"></i><a href="">Instagram</a></p>
-            {% endif %}
-            {% if page_user.twitter_url %}
-                <p><i class="fab fa-linkedin mr-3"></i><a href="{{ page_user.twitter_url }}">LinkedIn</a></p>
-            {% else %}
-                <p><i class="fab fa-linkedin mr-3"></i><a href="">LinkedIn</a></p>
-            {% endif %}
-        </div>
-    </div>
-
-    {% if user.id == page_user.user_id %}
-        <div class="edit_section">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-
-            <div class="edit_section_buttons">
-                <a href="{% url 'edit profile' page_user.pk %}">Редактирай Профил</a>
-                <a href="{% url 'change-email-username' page_user.pk %}">Редактирай Имейл/Име</a>
-                <a href="{% url 'delete profile' page_user.pk %}">Изтрий Профил</a>
-                <a href="{% url 'password' %}">Промени Парола</a>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if user.id == page_user.user_id %}
-        <div class="subscription_section">
-            <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            <div class="subscription_section_sub">
-                <p>Абонамент</p>
-                <p class="bolder">{{ subscription_plan }}</p>
-                {% if is_subscription_plan_paid %}
-                    <p>Следващо плащане по абонамент</p>
-                    <p class="bolder">{{ next_invoice_date }}</p>
-                    <p>Деактивирай абонамент</p>
-                    <p>
-                        <a href="{% url 'cancel-subscription' %}">ТУК</a>
-                    </p>
+            <div class="social_media_links">
+                {% if page_user.website_url %}
+                    <p><i class="fas fa-home mr-3"></i><a href="{{ page_user.website_url }}">Website Link</a></p>
+                {% else %}
+                    <p><i class="fas fa-home mr-3"></i><a href="">Website Link</a></p>
+                {% endif %}
+                {% if page_user.facebook_url %}
+                    <p><i class="fab fa-facebook mr-3"></i><a href="{{ page_user.facebook_url }}">Facebook</a></p>
+                {% else %}
+                    <p><i class="fab fa-facebook mr-3"></i><a href="">Facebook</a></p>
+                {% endif %}
+                {% if page_user.instagram_url %}
+                    <p><i class="fab fa-instagram mr-3"></i><a href="{{ page_user.instagram_url }}">Instagram</a></p>
+                {% else %}
+                    <p><i class="fab fa-instagram mr-3"></i><a href="">Instagram</a></p>
+                {% endif %}
+                {% if page_user.twitter_url %}
+                    <p><i class="fab fa-linkedin mr-3"></i><a href="{{ page_user.twitter_url }}">LinkedIn</a></p>
+                {% else %}
+                    <p><i class="fab fa-linkedin mr-3"></i><a href="">LinkedIn</a></p>
                 {% endif %}
             </div>
         </div>
-    {% endif %}
+
+        {% if user.id == page_user.user_id %}
+            <div class="edit_section">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+
+                <div class="edit_section_buttons">
+                    <a href="{% url 'edit profile' page_user.pk %}">Редактирай Профил</a>
+                    <a href="{% url 'change-email-username' page_user.pk %}">Редактирай Имейл/Име</a>
+                    <a href="{% url 'delete profile' page_user.pk %}">Изтрий Профил</a>
+                    <a href="{% url 'password' %}">Промени Парола</a>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if user.id == page_user.user_id %}
+            <div class="subscription_section">
+                <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                <div class="subscription_section_sub">
+                    <p>Абонамент</p>
+                    <p class="bolder">{{ subscription_plan }}</p>
+                    {% if is_subscription_plan_paid %}
+                        <p>Следващо плащане по абонамент</p>
+                        <p class="bolder">{{ next_invoice_date }}</p>
+                        <p>Деактивирай абонамент</p>
+                        <p>
+                            <a href="{% url 'cancel-subscription' %}">ТУК</a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
 
     {% include 'shared/jobs_context_box.html' %}
 
