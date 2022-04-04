@@ -57,27 +57,24 @@ select {
 
 @media screen and (max-width: 768px) {
     html {
-        font-size: 10px;
+        font-size: 16px;
     }
 
     .search_filter_section > form {
         display: block;
-        font-size: 16px;
     }
 
     select {
         width: 25rem;
         margin: 0 0 1rem 0;
-        font-size: 16px;
     }
 
-    input, select, label {
+    input, select {
         width: 100%;
-        font-size: 16px;
     }
 
     .form-input-search input {
-        font-size: 16px;
+        font-size: 1rem;
         text-align: center;
         margin: 0 0 4rem 0;
     }

@@ -1,3 +1,21 @@
+#myBtnContainer {
+    margin: 7rem auto 2rem;
+    text-align: center;
+    max-width: 1200px;
+}
+
+#myBtnContainer > button {
+    margin-bottom: 10px;
+}
+
+.filterDiv {
+    /*display: none;*/
+}
+
+.show {
+    /*display: flex;*/
+}
+
 .btn_submit_section {
     color: #007bff;
     border-color: #007bff;
