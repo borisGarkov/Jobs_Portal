@@ -43,23 +43,23 @@
         {#            </div>#}
         {#        </div>#}
 
-        <a href="{% url 'profile' user.id %}">Профил</a>
+        <a href="{% url 'profile' user.slug %}">Профил</a>
         <a href="{% url 'logout' %}">Изход</a>
     {% else %}
-        <button class="create_job entry" type="submit">
-            <a href="{% url 'login' %}">Вход</a>
-        </button>
+{#        <button class="create_job entry" type="submit">#}
+{#            <a href="{% url 'login' %}">Вход</a>#}
+{#        </button>#}
     {% endif %}
 
     {#    <button class="share-button search-button" type="submit">#}
     {#        <a href="{% url 'search all pages' %}"><span class="iconify" data-icon="bi:search"></span></a>#}
     {#    </button>#}
 
-    {% if user.is_authenticated %}
-        <button class="create_job" type="submit">
-            <a href="{% url 'create job' %}">Създай обява</a>
-        </button>
-    {% endif %}
+{#    {% if user.is_authenticated %}#}
+{#        <button class="create_job" type="submit">#}
+{#            <a href="{% url 'create job' %}">Създай обява</a>#}
+{#        </button>#}
+{#    {% endif %}#}
 
 </div>
 

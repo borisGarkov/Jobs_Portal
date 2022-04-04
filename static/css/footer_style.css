@@ -124,4 +124,8 @@ hr {
     .footer_rent_a_hand {
         display: none;
     }
+
+    .footer_contacts {
+        display: none;
+    }
 }

@@ -5,7 +5,7 @@ from jobs_portal.job_auth.views import *
 
 urlpatterns = [
     path('register/', RegisterUser.as_view(), name='register'),
-    path('change-email-username/<int:pk>/', UpdateEmailUsernamePage.as_view(), name='change-email-username'),
+    path('change-email-username/<slug:slug>/', UpdateEmailUsernamePage.as_view(), name='change-email-username'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),

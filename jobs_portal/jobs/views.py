@@ -32,7 +32,7 @@ class CreateJob(CreateView):
             return super().form_valid(form)
         else:
             messages.warning(self.request, 'Достигнахте лимита на обяви, които можете да споделите!')
-            return HttpResponseRedirect(reverse('profile', args=[self.request.user.pk]))
+            return HttpResponseRedirect(reverse('profile', args=[self.request.user.slug]))
 
 
 @method_decorator(login_required, name='dispatch')

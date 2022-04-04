@@ -83,6 +83,9 @@ class JobModel(models.Model):
         to=UserModel,
         on_delete=models.CASCADE,
     )
+    is_validated = models.BooleanField(
+        default=False,
+    )
 
     likes = models.ManyToManyField(ProfileModel, related_name='job_posts')
 

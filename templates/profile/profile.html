@@ -46,9 +46,9 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 
                 <div class="edit_section_buttons">
-                    <a href="{% url 'edit profile' page_user.pk %}">Редактирай Профил</a>
-                    <a href="{% url 'change-email-username' page_user.pk %}">Редактирай Имейл/Име</a>
-                    <a href="{% url 'delete profile' page_user.pk %}">Изтрий Профил</a>
+                    <a href="{% url 'edit profile' user.slug %}">Редактирай Профил</a>
+                    <a href="{% url 'change-email-username' user.slug %}">Редактирай Имейл/Име</a>
+                    <a href="{% url 'delete profile' user.slug %}">Изтрий Профил</a>
                     <a href="{% url 'password' %}">Промени Парола</a>
                 </div>
             </div>

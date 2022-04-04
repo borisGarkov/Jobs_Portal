@@ -54,4 +54,8 @@
         flex-direction: column;
         row-gap: 2rem;
     }
+
+    .content-box {
+        margin-right: 0;
+    }
 }

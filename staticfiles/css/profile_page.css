@@ -1,6 +1,10 @@
-* {
+html {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    size: 16px;
+    /*font-size: 16px;*/
+}
+
+.profile_page {
+    font-size: 16px;
 }
 
 .profile_img {
@@ -25,7 +29,7 @@
 }
 
 .profile_img > img {
-    max-width: 15%;
+    max-width: 20%;
     object-fit: contain;
     clip-path: circle(37%);
 }
@@ -113,4 +117,10 @@
 
 .subscription_section_sub > p > a {
     text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .profile_img > img {
+        max-width: 30%;
+    }
 }

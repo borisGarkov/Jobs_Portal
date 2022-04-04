@@ -5,11 +5,13 @@ from .models import WORK_CATEGORIES, WORK_TYPE
 from utils.forms import BootstrapFormMixin
 from jobs_portal.jobs.models import JobModel
 
+EXCLUDE_FIELDS = ('user', 'likes', 'last_modified', 'is_validated')
+
 
 class JobForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = JobModel
-        exclude = ('user', 'likes', 'last_modified')
+        exclude = EXCLUDE_FIELDS
 
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Позиция'}),
@@ -33,7 +35,7 @@ class JobForm(BootstrapFormMixin, forms.ModelForm):
 class UpdateJobForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = JobModel
-        exclude = ('user', 'likes', 'last_modified')
+        exclude = EXCLUDE_FIELDS
 
         labels = {
             'image': 'Снимка на дейност / фирма',

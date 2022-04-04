@@ -9,7 +9,7 @@
             <div class="name_section">
                 <img src="{{ job.user.profilemodel.profile_photo.url }}">
                 <div class="name_sub_section">
-                    <a href="{% url 'profile' current_user.id %}">{{ job.user.username }}</a>
+                    <a href="{% url 'profile' current_user.slug %}">{{ job.user.username }}</a>
                     <span>{{ job.work_category }}</span>
                 </div>
             </div>

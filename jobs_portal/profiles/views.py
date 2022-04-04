@@ -34,10 +34,13 @@ class ShowProfilePage(DetailView):
             6: 'Ейй най-големия си ей!',
         }
 
-        context = super(ShowProfilePage, self).get_context_data(**kwargs)
-        user = UserModel.objects.get(pk=self.kwargs['pk'])
-        profile_jobs = JobModel.objects.filter(user_id=user.id).order_by('-id')
-        user_subscription_plan = UserSubscriptionPlan.objects.get(user=self.kwargs['pk']).subscription_plan_id
+        context = super().get_context_data(**kwargs)
+        user = UserModel.objects.get(slug=self.kwargs['slug'])
+        profile_jobs = JobModel.objects.filter(
+            user_id=user.id,
+            is_validated=True,
+        ).order_by('-id')
+        user_subscription_plan = UserSubscriptionPlan.objects.get(user=user.id).subscription_plan_id
         subscription_plan = SUBSCRIPTION_PLAN.get(user_subscription_plan)
 
         current_customer_id = find_stripe_customer(current_user_email=user.email)
@@ -67,7 +70,7 @@ class UpdateProfilePage(UpdateView):
     template_name = 'profile/update_profile.html'
 
     def get_success_url(self, **kwargs):
-        return reverse("profile", kwargs={'pk': self.object.pk})
+        return reverse("profile", kwargs={'slug': self.object.slug})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -82,4 +85,4 @@ class PasswordChange(PasswordChangeView):
     template_name = 'profile/password-change.html'
 
     def get_success_url(self, **kwargs):
-        return reverse("profile", kwargs={'pk': self.request.user.pk})
+        return reverse("profile", kwargs={'slug': self.request.user.slug})

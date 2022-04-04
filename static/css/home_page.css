@@ -2,9 +2,17 @@
     /*display: flex;*/
     /*align-items: center;*/
     /*justify-content: space-evenly;*/
-    background-color: #cde0ef;
+    /*background-color: #cde0ef;*/
+    background: url('/static/images/working_man.jpeg') center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
     margin-top: 5rem;
     padding: 4rem 0;
+    width: 100%;
 }
 
 .main_upper_section > img {
@@ -17,27 +25,30 @@
     /*max-width: 31%;*/
 }
 
-.main_upper_section_text p, h1, h2 {
+.main_upper_section_text > p, .main_upper_section_text > h1, .main_upper_section_text > h2 {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 300;
     text-align: center;
+    color: white;
 }
 
-.main_upper_section_text h1 {
+.main_upper_section_text > h1 {
     font-size: 3rem;
     margin: 2rem 0 0 0;
+    color: white;
+
 }
 
-.main_upper_section_text h2 {
+.main_upper_section_text > h2 {
     font-size: 2rem;
     margin: 0;
 }
 
-.main_upper_section_text p {
+.main_upper_section_text > p {
     font-size: larger;
 }
 
-.main_upper_section img {
+.main_upper_section > img {
     max-width: 35%;
 }
 

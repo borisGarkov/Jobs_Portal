@@ -3,6 +3,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, PermissionsMixin
 from django.core.validators import validate_email
 from django.db import models
+from django_extensions.db.fields import AutoSlugField
+from transliterate import translit
 
 
 class AppUserManager(BaseUserManager):
@@ -49,6 +51,7 @@ class AppBaseUserModel(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(
         max_length=25,
+        unique=True,
     )
 
     is_staff = models.BooleanField(
@@ -63,6 +66,8 @@ class AppBaseUserModel(AbstractBaseUser, PermissionsMixin):
         default=False,
     )
 
+    slug = AutoSlugField(populate_from='username')
+
     date_joined = models.DateField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'
@@ -71,3 +76,12 @@ class AppBaseUserModel(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f'{self.email}'
+
+    def slugify_function(self, content):
+        '''
+        first transliterate slug if it is in BG
+        then if it contains multiple words, split by whitespace then join all words by '-'
+        and finally check if '_' appears in the word and replace it with '-'
+        '''
+        content = translit(content, language_code='bg', reversed=True)
+        return '-'.join(content.split()).replace('_', '-').lower()

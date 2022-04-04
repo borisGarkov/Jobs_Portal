@@ -59,13 +59,14 @@ class JobsPageBaseView(ListView):
             selected_work_category = self.request.GET['work_category']
             selected_work_type = self.request.GET['work_type']
 
-            qs = JobModel.objects.filter(
+            return qs.filter(
                 work_type__in=work_types if selected_work_type in ['Покажи всички', ''] else [selected_work_type],
                 work_category__in=work_categories if selected_work_category in ['Покажи всички',
                                                                                 ''] else [selected_work_category],
+                is_validated=True,
             )
 
-        return qs
+        return qs.filter(is_validated=True, )
 
 
 class ContactsView(FormView):
