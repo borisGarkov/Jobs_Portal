@@ -9,9 +9,6 @@
             <h1>ПЛАТФОРМА ЗА РАБОТА</h1>
             <h2>Сподели обява с няколко клика.</h2>
 
-
-            {#            <p>С нас работиш, когато искаш и колкото поискаш. Без дългосрочни договори и излишни#}
-            {#                интервюта.</p>#}
             <div class="subsection_button">
                 <button type="submit" class="btn_submit center_button">
                     <a href="{% url 'create job' %}">Създай обява</a>
@@ -76,6 +73,7 @@
         </div>
     </div>
 
+    {% include 'review_section.html' %}
 
     {% include 'shared/footer.html' %}
 {% endblock %}

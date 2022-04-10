@@ -1,0 +1,32 @@
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/review_section_style.css">
+
+    <section class="container">
+        <div class="title">
+            <h2>Обратна връзка</h2>
+            <div class="underline"></div>
+        </div>
+
+        <article class="review">
+            <div class="img-container">
+                <img src="/static/images/nenko.jpg" id="person-img" alt=""/>
+            </div>
+            <h4 id="author">Ненко Андреев </h4>
+            <p id="job">Фитнес инструктор</p>
+            <p id="info">
+                Страхотна и модерна платформа, чрез която успявам да достигна до хора, които искат да променят
+                начина си на живот.
+            </p>
+
+            <div class="button-container">
+                <button class="prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <button class="next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </article>
+    </section>
+{% endblock %}
